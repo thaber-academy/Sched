@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
@@ -10,9 +9,11 @@
 
 <style>
 :root {
-  --brand-primary: #4f46e5;
-  --brand-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-  --brand-light: #f5f3ff;
+  /* 🌟 درجات لون أزرق شعار "ثابر" الرسمي */
+  --brand-primary: #2253a3;
+  --brand-dark: #194082;
+  --brand-gradient: linear-gradient(135deg, #2253a3 0%, #366bc5 100%);
+  --brand-light: #eef4ff;
   --bg-main: #f1f5f9;
   --panel-bg: #ffffff;
   --text-primary: #0f172a;
@@ -21,7 +22,7 @@
   --accent-amber: #f59e0b;
   
   --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
-  --shadow-md: 0 10px 20px -5px rgba(79, 70, 229, 0.08);
+  --shadow-md: 0 10px 20px -5px rgba(34, 83, 163, 0.12);
   --radius-lg: 16px;
   --radius-md: 12px;
   --radius-sm: 8px;
@@ -37,30 +38,28 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* 🌟 الشريط العلوي */
+/* 🌟 الشريط العلوي والشعار المطور */
 .app-header {
   background: var(--panel-bg);
   border-bottom: 1px solid var(--border-color);
   position: sticky; top: 0; z-index: 1000;
-  padding: 12px 20px;
+  padding: 10px 20px;
   box-shadow: var(--shadow-sm);
 }
 .header-inner {
   max-width: 1300px; margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between;
 }
-.brand-logo { display: flex; align-items: center; gap: 12px; }
-.logo-img {
-  height: 48px; width: auto; object-fit: contain;
-  border-radius: var(--radius-sm);
+.brand-logo-banner {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
 }
-.brand-title h1 { font-size: 1.15rem; font-weight: 900; color: var(--text-primary); line-height: 1.2; }
-.brand-title p { font-size: 0.75rem; color: var(--brand-primary); font-weight: 800; }
 
 /* 💬 شارة الواتساب التفاعلية */
 .badge-contact {
   background: #25d366; color: #ffffff; font-size: 0.85rem;
-  font-weight: 800; padding: 6px 14px; border-radius: 999px;
+  font-weight: 800; padding: 8px 16px; border-radius: 999px;
   text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
   box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3); transition: 0.2s ease;
 }
@@ -74,7 +73,7 @@ body {
   background: var(--panel-bg);
   border-bottom: 1px solid var(--border-color);
   padding: 10px 20px 0;
-  position: sticky; top: 67px; z-index: 999;
+  position: sticky; top: 69px; z-index: 999;
 }
 .mobile-tabs-inner {
   display: flex; gap: 10px; max-width: 500px; margin: 0 auto;
@@ -114,7 +113,7 @@ body {
   border-radius: 50%; display: flex; align-items: center; justify-content: center;
   font-size: 0.85rem; font-weight: 900;
 }
-.card-header h2 { font-size: 1.05rem; font-weight: 800; }
+.card-header h2 { font-size: 1.05rem; font-weight: 800; color: var(--brand-primary); }
 
 .toggle-group { display: flex; background: var(--bg-main); border-radius: var(--radius-md); padding: 4px; margin-bottom: 16px; }
 .toggle-group label { flex: 1; text-align: center; font-size: 0.85rem; font-weight: 700; padding: 10px; cursor: pointer; border-radius: 8px; color: var(--text-secondary); transition: 0.2s; }
@@ -136,20 +135,65 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
   font-family: inherit; font-weight: 800; font-size: 0.95rem; cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;
 }
-.btn-brand { background: var(--brand-gradient); color: #fff; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3); }
-.btn-brand:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4); }
+.btn-brand { background: var(--brand-gradient); color: #fff; box-shadow: 0 4px 15px rgba(34, 83, 163, 0.3); }
+.btn-brand:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(34, 83, 163, 0.4); }
 .btn-outline { background: #fff; color: var(--brand-primary); border: 2px solid var(--brand-light); }
 .btn-outline:hover { background: var(--brand-light); }
 
-.lessons-picker { max-height: 250px; overflow-y: auto; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); padding: 8px; background: var(--bg-main); }
-.lesson-option {
-  display: flex; align-items: center; justify-content: space-between; gap: 8px;
-  padding: 10px; border-radius: var(--radius-sm); background: #fff; margin-bottom: 6px;
-  border: 1px solid var(--border-color);
+.lessons-picker { max-height: 340px; overflow-y: auto; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); padding: 10px; background: var(--bg-main); }
+
+/* 🌟 تصميم بطاقة الدرس المتوافقة مع أزرق الشعار */
+.lesson-card-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  margin-bottom: 10px;
+  border: 1.5px solid var(--border-color);
+  transition: all 0.25s ease;
 }
-.lesson-info { display: flex; align-items: center; gap: 10px; cursor: pointer; flex: 1; font-size: 0.85rem; font-weight: 700; }
-.lesson-info input { accent-color: var(--brand-primary); width: 18px; height: 18px; }
-.lesson-activity-select { width: auto !important; padding: 6px 10px !important; font-size: 0.75rem !important; border-radius: 6px !important; border: 1px solid #cbd5e1 !important; }
+.lesson-card-item:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+.lesson-card-item.selected {
+  background: var(--brand-light);
+  border-color: var(--brand-primary);
+  box-shadow: 0 4px 12px rgba(34, 83, 163, 0.12);
+}
+.lesson-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.45;
+}
+.lesson-info-row input[type="checkbox"] {
+  accent-color: var(--brand-primary);
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.lesson-activity-select {
+  width: 100% !important;
+  padding: 9px 12px !important;
+  font-size: 0.85rem !important;
+  font-weight: 800 !important;
+  border-radius: 10px !important;
+  border: 2px solid var(--brand-primary) !important;
+  background-color: #ffffff !important;
+  color: var(--brand-primary) !important;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 
 .selected-tags { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
 .tag-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); border-right: 4px solid var(--brand-primary); padding: 10px 12px; border-radius: var(--radius-sm); font-size: 0.82rem; }
@@ -167,21 +211,17 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
 .timeline-header h2 { font-size: 1.25rem; font-weight: 900; display: flex; align-items: center; gap: 8px; }
 .timeline-header p { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
 
-/* 🌟 ختم منصة ثابر الرسمي مع الشعار */
+/* 🌟 ختم منصة ثابر الرسمي بحسب لون الشعار */
 .thaber-brand-stamp {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
   padding: 16px;
   background: var(--brand-light);
-  border-bottom: 2px dashed #ddd6fe;
-  font-weight: 900;
-  color: var(--brand-primary);
-  font-size: 1.1rem;
+  border-bottom: 2px dashed #c1d6f3;
 }
-.stamp-logo {
-  height: 40px;
+.stamp-logo-img {
+  height: 45px;
   width: auto;
   object-fit: contain;
 }
@@ -205,7 +245,7 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
 .resource-bar { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
 .res-link { display: inline-flex; font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; text-decoration: none; }
 .res-pdf { background: #fee2e2; color: #dc2626; }
-.res-interactive { background: #e0e7ff; color: #4f46e5; }
+.res-interactive { background: var(--brand-light); color: var(--brand-primary); }
 
 .timeline-actions { background: var(--panel-bg); padding: 16px 24px; display: flex; gap: 10px; justify-content: flex-end; border: 1px solid var(--border-color); border-radius: var(--radius-lg); margin-top: 16px; }
 
@@ -225,7 +265,7 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
   .day-title { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
 
-/* 🖨️ التنسيقات عند الطباعة المباشرة من المتصفح */
+/* 🖨️ التنسيقات عند الطباعة المباشرة */
 @media print {
   body { background: #fff !important; padding: 0 !important; }
   .app-header, .mobile-tabs, .control-panel, .stats-grid, .timeline-actions, .res-link {
@@ -243,11 +283,7 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
 <header class="app-header">
   <div class="header-inner">
     <div class="brand-logo">
-      <img src="https://i.imgur.com/WVNRksD.png" crossorigin="anonymous" alt="شعار ثابر" class="logo-img">
-      <div class="brand-title">
-        <h1>مخطط ثابر الذكي</h1>
-        <p>منصة ثابر التعليمية</p>
-      </div>
+      <img src="https://i.imgur.com/pZ9hazV.png" crossorigin="anonymous" alt="مخطط ثابر الذكي" class="brand-logo-banner">
     </div>
     <div class="header-actions">
       <!-- 💬 زر تواصل عبر الواتساب -->
@@ -397,8 +433,7 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
     <!-- 🗓️ منطقة الجدول التي تُصدر كـ PDF أو تطبع -->
     <div class="timeline-card" id="scheduleArea">
       <div class="thaber-brand-stamp">
-        <img src="https://i.imgur.com/WVNRksD.png" crossorigin="anonymous" alt="شعار ثابر" class="stamp-logo">
-        <span>منصة ثابر التعليمية | جدول المذاكرة الشخصي</span>
+        <img src="https://i.imgur.com/pZ9hazV.png" crossorigin="anonymous" alt="منصة ثابر التعليمية" class="stamp-logo-img">
       </div>
       <div class="timeline-header">
         <div>
@@ -414,7 +449,7 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
       </div>
     </div>
 
-    <!-- 🖨️ أزرار الإجراءات خارج منطقة تصدير PDF -->
+    <!-- 🖨️ أزرار الإجراءات -->
     <div class="timeline-actions">
       <button type="button" class="btn btn-outline" id="printBtn" style="width:auto;">🖨️ طباعة الجدول</button>
       <button type="button" class="btn btn-brand" id="pdfBtn" style="width:auto;">📄 حفظ كـ PDF</button>
@@ -459,7 +494,7 @@ const lessonData = {
  "الدراسات الاجتماعية": ["1-1 الطقس والمناخ", "1-2 عناصر المناخ", "1-3 الأقاليم المناخية", "2-1 قيام دولة البوسعيد (١٧٤٤م)", "2-2 المنجزات الحضارية لدولة البوسعيد", "2-3 العلاقات الحضارية لعمان في عصر دولة البوسعيد", "3-1 التنظيم الإداري لسلطنة عمان", "3-2 النظام الأساسي للدولة", "3-3 الشورى في المجتمع العماني"]
  },
  "9": {
- "التربية الإسلامية": ["التلاوة والحفظ", "1-1 المكيّ والمدنيّ / علومُ القرآنِ", "2-1 سورةُ آلِ عمرانَ (١٤-١٧) / تفسيرٌ", "3-1 الإجمالُ في طلبِ الدُّنيا / حديثٌ شريفٌ", "4-1 المعطي المانعُ / عقيدةٌ", "5-1 صلحُ الحُدَيْبِيَةِ / سيرةٌ", "6-1 الأمنُ النفسيُّ / قيمٌ وأخلاقٌ", "1-2 التِقاءُ السَّاكِنَيْنِ (١) / تجويدٌ", "2-2 سورةُ الإسراءِ (١٠٥-١١١) / تفسيرٌ", "3-2 شُعَبُ الإيمانِ / حديثٌ شريفٌ", "4-2 دعوةُ نوحٍ عليه السلام / عقيدةٌ", "5-2 مِنْ مَصادِرِ التَّشريعِ الإسلاميِّ (١) / فِقْهٌ", "6-2 سَمْتُ أهلِ عُمانَ / قيمٌ وأخلاقٌ", "1-3 التِقاءُ السَّاكِنَيْنِ (٢) / تجويدٌ", "2-3 سورةُ الحِجْرِ (٨٧-٩٩) / تفسيرٌ", "3-3 أكبرُ الكبائرِ / حديثٌ شريفٌ", "4-3 مِنْ مَصادِرِ التَّشريعِ الإسلاميِّ (٢) / فِقْهٌ", "5-3 المجلس النبويُّ / سيرةٌ", "6-3 سماحةُ المؤمنِ / قيمٌ وأخلاقٌ", "1-4 سورةُ يوسفَ (٩٤-١٠١) / تفسيرٌ", "2-4 المُسْتَظِلُّونَ بِظِلِّ اللهِ / حديثٌ شريفٌ", "3-4 دعوةُ إبراهيمَ عليه السلام / عقيدةٌ", "4-4 الأيمانُ / فِقْهٌ", "5-4 القَعْقاعُ بنُ عَمْروٍ رضي الله عنه / سيرةٌ", "6-4 النَّزاهَةُ / قيمٌ وأخلاقٌ"],
+ "التربية الإسلامية": ["التلاوة والحفظ", "1-1 المكيّ والمدنيّ / علومُ القرآنِ", "2-1 سورةُ آلِ عمرانَ (١٤-١٧) / تفسيرٌ", "3-1 الإجمالُ في طلبِ الدُّنيا / حديثٌ شريفٌ", "4-1 المعطي المانعُ / عقيدةٌ", "5-1 صلحُ الحُدَيْبِيَةِ / سيرةٌ", "6-1 الأمنُ النفسيُّ / قيمٌ وأخلاقٌ", "1-2 التِقاءُ السَّاكِنَيْنِ (١) / تجويدٌ", "2-2 سورةُ الإسراءِ (١٠٥-١١١) / تفسيرٌ", "3-2 شُعَبُ الإيمانِ / حديثٌ شريفٌ", "4-2 دعوةُ نوحٍ عليه السلام / عقيدةٌ", "5-2 مِنْ مَصادِرِ التَّشريعِ الإسلاميِّ (١) / فِقْهٌ", "6-2 سَمْتُ أهلِ عُمانَ / قيمٌ وأخلاقٌ", "1-3 التِقاءُ السَّاكِنَيْنِ (٢) / تجويدٌ", "2-3 سورةُ الحِجْرِ (٨٧-٩٩) / تفسيرٌ", "3-3 أكبرُ الكبائرِ / حديثٌ شريفٌ", "4-3 مِنْ مَصادِرِ التَّشريعِ الإسلاميِّ (٢) / فِقْهٌ", "5-3 المجلس النبويُّ / سيرةٌ", "6-3 سماحةُ المؤمنِ / قيمٌ وأخلاقٌ", "1-4 سورةُ يوسفَ (٩٤-١٠1) / تفسيرٌ", "2-4 المُسْتَظِلُّونَ بِظِلِّ اللهِ / حديثٌ شريفٌ", "3-4 دعوةُ إبراهيمَ عليه السلام / عقيدةٌ", "4-4 الأيمانُ / فِقْهٌ", "5-4 القَعْقاعُ بنُ عَمْروٍ رضي الله عنه / سيرةٌ", "6-4 النَّزاهَةُ / قيمٌ وأخلاقٌ"],
  "اللغة العربية": ["1-1 القراءة: البلاغة عند العرب", "1-2 الأنشطة النحوية والصرفية: تطبيقات على ما سبقت دراسته", "1-3 الأنشطة الإملائية: تطبيقات على ما سبقت دراسته", "1-4 التعبير: كتابة فقرة", "1-5 في المعجم: المعجم المختص", "1-6 النص الأدبي: يا سماء", "2-1 القراءة: الأدب في عصر اليعاربة", "2-2 الأنشطة النحوية والصرفية: جملة كاد وأخواتها", "2-3 الأنشطة الإملائية: الهمزة المتطرفة", "2-4 التعبير: تصميم الموضوع", "2-5 الاستماع: عمان جوهرة جزيرة العرب", "2-6 اقرأ واستمتع: من نصيحة الشيخ الخراسيني لأحد أئمة اليعاربة", "3-1 القراءة: المتنبي", "3-2 الأنشطة النحوية والصرفية: الأفعال المتعدية إلى مفعولين أصلهما المبتدأ والخبر", "3-3 الأنشطة الإملائية: تنوين الهمزة المتطرفة", "3-4 التعبير: تصميم موضوع وكتابته", "3-5 النص الأدبي: لوحة الزمن", "4-1 القراءة: قرآن الفجر", "4-2 الأنشطة النحوية والصرفية: الأفعال المتعدية إلى مفعولين ليس أصلهما المبتدأ والخبر", "4-3 الأنشطة الإملائية: رسم الألف في أواخر الأسماء", "4-4 التعبير: التلخيص", "4-5 الاستماع: مريم الصناع", "4-6 اقرأ واستمتع: في العلم", "5-1 القراءة: القصة في القرآن الكريم", "5-2 الأنشطة النحوية والصرفية: المفعول لأجله", "5-3 الأنشطة الإملائية: تطبيقات على رسم الهمزة المتطرفة وكتابة الألف في أواخر الأسماء", "5-4 التعبير: تلخيص موضوع", "5-5 النص الأدبي: يا كوكبا ما كان أقصر عمره", "6-1 القراءة: سيرة بقلم صاحبها", "6-2 الأنشطة النحوية والصرفية: المفعول المطلق", "6-3 الأنشطة الإملائية: رسم الألف في أواخر الأفعال", "6-4 التعبير: ترجمة علم", "6-5 الاستماع: علم الآثار في عصر الفضاء", "6-6 اقرأ واستمتع: ألم تغمض عيناك", "7-1 القراءة: كتاب تحفة الأعيان بسيرة أهل عمان", "7-2 الأنشطة النحوية والصرفية: المفعول فيه", "7-3 الأنشطة الإملائية: تطبيقات على رسم الألف في أواخر الأسماء والأفعال", "7-4 التعبير: كيفية عرض كتاب", "7-5 النص الأدبي: أبا تمام - أين تكون؟", "8-1 القراءة: من الخيال العلمي", "8-2 الأنشطة النحوية والصرفية: مراجعة لما سبقت دراسته", "8-3 الأنشطة الإملائية: تدريبات على علامات الترقيم", "8-4 التعبير: حكاية قصة", "8-5 الاستماع: الرازي", "8-6 النص الأدبي: حسن المجالسة وسوؤها", "8-7 اقرأ واستمتع: حذق طبيب"],
  "اللغة الإنجليزية": ["Unit 1: Teen Time", "Unit 2: Writers and Writing", "Unit 3: Money", "Unit 4: Space", "Club Corner"],
  "الرياضيات": ["1-1 الأنواع المختلفة من الأعداد", "2-1 الأعداد الأولية", "3-1 القوى والجذور", "4-1 الأعداد الموجهة", "5-1 ترتيب العمليات الحسابية", "1-2 الكسور المتكافئة", "2-2 العمليات على الكسور", "3-2 النسب المئوية", "4-2 الصيغة العلمية", "5-2 الآلة الحاسبة والصيغة العلمية", "6-2 الأعداد النسبية والأعداد غير النسبية", "1-3 استخدام الحروف (المتغيرات) لتمثيل القيم المجهولة", "2-3 التعويض", "3-3 تبسيط العبارات الجبرية", "4-3 التعامل مع الأقواس", "5-3 الأسس", "1-4 الدائرة", "2-4 الزوايا", "3-4 الإنشاءات الهندسية", "4-4 المثلثات", "5-4 الأشكال الرباعية", "6-4 مضلعات أخرى", "1-5 تقريب الأعداد", "2-5 التقدير", "3-5 الحدود العليا والحدود الدنيا", "1-6 فك الأقواس", "2-6 تحليل العبارات الجبرية إلى عوامل", "3-6 استخدام الصيغ وإعادة تنظيمها", "4-6 حل المعادلات", "5-6 المعادلات الخطية الآنية", "6-6 كتابة المعادلات لحل المسائل", "7-6 المتباينات الخطية", "1-7 رسم المستقيمات", "2-7 القطعة المستقيمة", "1-8 التماثل في الأشكال ثنائية الأبعاد", "2-8 التماثل في الأشكال ثلاثية الأبعاد", "3-8 التحويلات الهندسية", "4-8 تركيب التحويلات الهندسية", "1-9 المتتاليات", "2-9 المجموعات"],
@@ -593,15 +628,19 @@ function loadSubjects(){
   loadLessons();
 }
 
+// 🌟 تحميل كروت الدروس بتحديد ذكي
 function loadLessons(){
   const grade = $('gradeSelect').value;
   const subject = $('subjectSelect').value;
   const lessons = (lessonData[grade] && lessonData[grade][subject]) || [];
   
   $('lessonSelect').innerHTML = lessons.map((l, i) => `
-    <div class="lesson-option">
-      <label class="lesson-info"><input type="checkbox" value="${i}" id="chk_${i}"><span>${l}</span></label>
-      <select class="lesson-activity-select" id="act_${i}">
+    <div class="lesson-card-item" id="card_${i}">
+      <label class="lesson-info-row" for="chk_${i}">
+        <input type="checkbox" value="${i}" id="chk_${i}" onchange="toggleCardSelection(${i})">
+        <span>${l}</span>
+      </label>
+      <select class="lesson-activity-select" id="act_${i}" onclick="event.stopPropagation();">
         <option value="تحضير الدرس">تحضير الدرس (15 دقيقة)</option>
         <option value="مراجعة سريعة">مراجعة سريعة (25 دقيقة)</option>
         <option value="تلخيص وحفظ">تلخيص وحفظ (35 دقيقة)</option>
@@ -609,6 +648,17 @@ function loadLessons(){
         <option value="حل أسئلة">حل أسئلة (45 دقيقة)</option>
       </select>
     </div>`).join('');
+}
+
+// 🌟 تفعيل التأثير البصري المماثل للون الشعار للكارت عند اختياره
+function toggleCardSelection(index) {
+  const chk = document.getElementById(`chk_${index}`);
+  const card = document.getElementById(`card_${index}`);
+  if (chk.checked) {
+    card.classList.add('selected');
+  } else {
+    card.classList.remove('selected');
+  }
 }
 
 let selectedLessonsList = [];
@@ -631,6 +681,7 @@ function addLesson(){
       interactiveUrl: '#'
     });
     cb.checked = false;
+    toggleCardSelection(idx);
   });
   renderSelectedList();
 }
@@ -757,7 +808,7 @@ function generateSchedule(){
   switchTab('workspace');
 }
 
-// 📄 دالة تصدير PDF الاحترافية والمضمونة (تمنع ظهور الصفحة البيضاء في الجوال)
+// 📄 دالة تصدير PDF
 function exportPDF() {
   const scheduleArea = $('scheduleArea');
   const timelineBody = $('timelineBody');
@@ -772,7 +823,6 @@ function exportPDF() {
     return;
   }
 
-  // إظهار منطقة الجدول مؤقتاً لتفادي إخفائها بواسطة CSS للموبايل
   const workspace = $('workspaceArea');
   const originalWorkspaceStyle = workspace.style.display;
   workspace.style.display = 'block';
@@ -786,7 +836,7 @@ function exportPDF() {
       useCORS: true, 
       allowTaint: true,
       logging: false,
-      windowWidth: 1200 // إجبار التقاط الشاشة بأبعاد سطح المكتب العريضة
+      windowWidth: 1200 
     },
     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
     pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
