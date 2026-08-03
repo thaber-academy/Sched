@@ -992,7 +992,7 @@ function removeLesson(index){
 
 function addBreak(){
   const label = $('breakLabel').value.trim() || 'استراحة / صلاة';
-  const startMins = timeToMinutes($breakStartTime.value);
+  const startMins = timeToMinutes($('breakStartTime').value);
   const duration = parseInt($('breakDuration').value, 10);
   
   if (breaksList.some(b => startMins < (b.startMins + b.duration) && (startMins + duration) > b.startMins)) {
