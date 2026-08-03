@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<!-- 🌟 عنوان ووسوم المعاينة الاحترافية للواتساب وتطبيقات التواصل (Open Graph) -->
 <title>مخطط ثابر الذكي | منصة ثابر التعليمية</title>
+<meta name="description" content="نظّم وقتك، ضاعف تركيزك، واصنع جدول مذاكرتك الشخصي في ثوانٍ مع منصة ثابر التعليمية." />
+<meta property="og:title" content="مخطط ثابر الذكي | منصة ثابر التعليمية" />
+<meta property="og:description" content="نظّم وقتك، ضاعف تركيزك، واصنع جدول مذاكرتك الشخصي في ثوانٍ مع منصة ثابر التعليمية." />
+<meta property="og:image" content="https://i.imgur.com/pZ9hazV.png" />
+<meta property="og:type" content="website" />
+<link rel="icon" href="https://i.imgur.com/pZ9hazV.png" type="image/png" />
+
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
 
@@ -50,10 +59,54 @@ body {
   max-width: 1300px; margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between;
 }
-.brand-logo-banner {
+.brand-logo { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+}
+.brand-logo-img {
   height: 48px;
   width: auto;
   object-fit: contain;
+}
+.brand-title h1 { 
+  font-size: 1.25rem; 
+  font-weight: 900; 
+  color: var(--brand-primary); /* نفس لون الشعار */
+  line-height: 1.2; 
+}
+.brand-title p { 
+  font-size: 0.8rem; 
+  color: var(--text-secondary); 
+  font-weight: 700; 
+  margin-top: -2px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 💡 زر النافذة المنبثقة للتعليمات */
+.btn-instructions {
+  background: var(--brand-light);
+  color: var(--brand-primary);
+  border: 1.5px solid #c1d6f3;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 800;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s ease;
+}
+.btn-instructions:hover {
+  background: var(--brand-primary);
+  color: #ffffff;
 }
 
 /* 💬 شارة الواتساب التفاعلية */
@@ -199,6 +252,25 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
 .tag-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); border-right: 4px solid var(--brand-primary); padding: 10px 12px; border-radius: var(--radius-sm); font-size: 0.82rem; }
 .tag-item .remove-btn { color: #ef4444; font-size: 1.2rem; cursor: pointer; font-weight: bold; }
 
+/* 🗑️ زر مسح المسودة */
+.clear-draft-btn {
+  background: #fef2f2;
+  color: #ef4444;
+  border: 1px dashed #fca5a5;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 6px;
+  text-align: center;
+  transition: 0.2s;
+  width: 100%;
+}
+.clear-draft-btn:hover {
+  background: #fee2e2;
+}
+
 /* 📊 الإحصائيات */
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .stat-box { background: var(--panel-bg); border-radius: var(--radius-lg); padding: 16px; border: 1px solid var(--border-color); text-align: center; }
@@ -211,7 +283,7 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
 .timeline-header h2 { font-size: 1.25rem; font-weight: 900; display: flex; align-items: center; gap: 8px; }
 .timeline-header p { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
 
-/* 🌟 ختم منصة ثابر الرسمي بحسب لون الشعار */
+/* 🌟 ختم منصة ثابر الرسمي */
 .thaber-brand-stamp {
   display: flex;
   align-items: center;
@@ -251,6 +323,89 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
 
 #loadingStatus { background: #e0f2fe; color: #0369a1; padding: 12px; border-radius: var(--radius-md); font-weight: 800; text-align: center; font-size: 0.85rem; margin-bottom: 15px; display: none; }
 
+/* 🪟 تنسيقات النافذة المنبثقة (Modal) */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  max-width: 580px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 28px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+.modal-overlay.active .modal-card {
+  transform: translateY(0);
+}
+.modal-header-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--brand-light);
+  margin-bottom: 18px;
+}
+.modal-header-title h3 {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--brand-primary);
+}
+.instructions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.instruction-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--bg-main);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border-right: 4px solid var(--brand-primary);
+}
+.instruction-num {
+  background: var(--brand-primary);
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 900;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.instruction-text {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
 /* 📱 استجابة الشاشات */
 @media (max-width: 1024px) {
   .mobile-tabs { display: block; }
@@ -268,7 +423,7 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
 /* 🖨️ التنسيقات عند الطباعة المباشرة */
 @media print {
   body { background: #fff !important; padding: 0 !important; }
-  .app-header, .mobile-tabs, .control-panel, .stats-grid, .timeline-actions, .res-link {
+  .app-header, .mobile-tabs, .control-panel, .stats-grid, .timeline-actions, .res-link, .modal-overlay {
     display: none !important;
   }
   .app-layout { display: block !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
@@ -282,10 +437,22 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
 
 <header class="app-header">
   <div class="header-inner">
+    
+    <!-- 🌟 الشعار والعنوان -->
     <div class="brand-logo">
-      <img src="https://i.imgur.com/pZ9hazV.png" crossorigin="anonymous" alt="مخطط ثابر الذكي" class="brand-logo-banner">
+      <img src="https://i.imgur.com/pZ9hazV.png" crossorigin="anonymous" alt="شعار ثابر" class="brand-logo-img">
+      <div class="brand-title">
+        <h1>مخطط ثابر الذكي</h1>
+        <p>منصة ثابر التعليمية</p>
+      </div>
     </div>
+
     <div class="header-actions">
+      <!-- 📖 زر فتح النافذة المنبثقة للتعليمات -->
+      <button type="button" class="btn-instructions" onclick="openInstructionsModal()">
+        📖 طريقة الاستخدام
+      </button>
+
       <!-- 💬 زر تواصل عبر الواتساب -->
       <a href="https://wa.me/96871444589" target="_blank" class="badge-contact">
         💬 71444589
@@ -404,6 +571,9 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
       </div>
       <button type="button" class="btn btn-outline" id="addLessonBtn">إضافة للمسودة +</button>
       <div id="selectedLessons" class="selected-tags"></div>
+      <div id="clearDraftContainer" style="display:none;">
+        <button type="button" class="clear-draft-btn" onclick="clearDraft()">🗑️ تفريغ كافة الدروس من المسودة</button>
+      </div>
     </div>
 
     <button type="button" class="btn btn-brand" id="generateBtn" style="padding: 16px; font-size: 1.1rem;">✨ إنشاء المخطط الزمني</button>
@@ -457,6 +627,58 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
   </main>
 </div>
 
+<!-- 🪟 النافذة المنبثقة (Modal) للتعليمات -->
+<div class="modal-overlay" id="instructionsModal">
+  <div class="modal-card">
+    <div class="modal-header-title">
+      <span style="font-size: 1.5rem;">📖</span>
+      <h3>دليل استخدام مخطط ثابر الذكي</h3>
+    </div>
+    
+    <div class="instructions-list">
+      <div class="instruction-step">
+        <span class="instruction-num">1</span>
+        <div class="instruction-text">
+          <strong>تحديد الروتين والوقت:</strong> اختر نوع الخطة (يومية أو أسبوعية)، أدخل اسمك وتاريخ بداية المذاكرة، ثم حدد وقت بداية ونهاية جلسة المذاكرة اليومية.
+        </div>
+      </div>
+
+      <div class="instruction-step">
+        <span class="instruction-num">2</span>
+        <div class="instruction-text">
+          <strong>إضافة أوقات الصلاة والاستراحة:</strong> أدخل اسم الاستراحة (مثلاً: صلاة المغرب) ووقتها ومدتها ليتم حجزها تلقائياً داخل جدولك وعدم التعارض مع المذاكرة.
+        </div>
+      </div>
+
+      <div class="instruction-step">
+        <span class="instruction-num">3</span>
+        <div class="instruction-text">
+          <strong>اختيار الدروس ونوع المذاكرة:</strong> حدد صفك الدراسي والمادة، اختر الدروس وحدد نوع المذاكرة المناسب لكل درس (تحضير، مراجعة سريعة، فهم وشرح، إلخ).
+        </div>
+      </div>
+
+      <div class="instruction-step">
+        <span class="instruction-num">4</span>
+        <div class="instruction-text">
+          <strong>الجمع من مواد مختلفة:</strong> اضغط على زر <code>إضافة للمسودة +</code>. يمكنك تغيير المادة واختيار دروس أخرى لجمع عدة مواد في نفس المسودة السفلية!
+        </div>
+      </div>
+
+      <div class="instruction-step">
+        <span class="instruction-num">5</span>
+        <div class="instruction-text">
+          <strong>توليد وحفظ المخطط:</strong> اضغط على <code>✨ إنشاء المخطط الزمني</code> ليقوم النظام بتوزيع دروسك بدقة، ثم يمكنك طباعة الجدول أو حفظه كـ PDF موثق بشعار ثابر.
+        </div>
+      </div>
+    </div>
+
+    <!-- 👈 زر الرجوع للمخطط -->
+    <button type="button" class="btn btn-brand" onclick="closeInstructionsModal()" style="margin-top: 24px; width: 100%;">
+      👈 رجوع للمخطط
+    </button>
+  </div>
+</div>
+
 <script>
 'use strict';
 
@@ -494,7 +716,7 @@ const lessonData = {
  "الدراسات الاجتماعية": ["1-1 الطقس والمناخ", "1-2 عناصر المناخ", "1-3 الأقاليم المناخية", "2-1 قيام دولة البوسعيد (١٧٤٤م)", "2-2 المنجزات الحضارية لدولة البوسعيد", "2-3 العلاقات الحضارية لعمان في عصر دولة البوسعيد", "3-1 التنظيم الإداري لسلطنة عمان", "3-2 النظام الأساسي للدولة", "3-3 الشورى في المجتمع العماني"]
  },
  "9": {
- "التربية الإسلامية": ["التلاوة والحفظ", "1-1 المكيّ والمدنيّ / علومُ القرآنِ", "2-1 سورةُ آلِ عمرانَ (١٤-١٧) / تفسيرٌ", "3-1 الإجمالُ في طلبِ الدُّنيا / حديثٌ شريفٌ", "4-1 المعطي المانعُ / عقيدةٌ", "5-1 صلحُ الحُدَيْبِيَةِ / سيرةٌ", "6-1 الأمنُ النفسيُّ / قيمٌ وأخلاقٌ", "1-2 التِقاءُ السَّاكِنَيْنِ (١) / تجويدٌ", "2-2 سورةُ الإسراءِ (١٠٥-١١١) / تفسيرٌ", "3-2 شُعَبُ الإيمانِ / حديثٌ شريفٌ", "4-2 دعوةُ نوحٍ عليه السلام / عقيدةٌ", "5-2 مِنْ مَصادِرِ التَّشريعِ الإسلاميِّ (١) / فِقْهٌ", "6-2 سَمْتُ أهلِ عُمانَ / قيمٌ وأخلاقٌ", "1-3 التِقاءُ السَّاكِنَيْنِ (٢) / تجويدٌ", "2-3 سورةُ الحِجْرِ (٨٧-٩٩) / تفسيرٌ", "3-3 أكبرُ الكبائرِ / حديثٌ شريفٌ", "4-3 مِنْ مَصادِرِ التَّشريعِ الإسلاميِّ (٢) / فِقْهٌ", "5-3 المجلس النبويُّ / سيرةٌ", "6-3 سماحةُ المؤمنِ / قيمٌ وأخلاقٌ", "1-4 سورةُ يوسفَ (٩٤-١٠1) / تفسيرٌ", "2-4 المُسْتَظِلُّونَ بِظِلِّ اللهِ / حديثٌ شريفٌ", "3-4 دعوةُ إبراهيمَ عليه السلام / عقيدةٌ", "4-4 الأيمانُ / فِقْهٌ", "5-4 القَعْقاعُ بنُ عَمْروٍ رضي الله عنه / سيرةٌ", "6-4 النَّزاهَةُ / قيمٌ وأخلاقٌ"],
+ "التربية الإسلامية": ["التلاوة والحفظ", "1-1 المكيّ والمدنيّ / علومُ القرآنِ", "2-1 سورةُ آلِ عمرانَ (١٤-١٧) / تفسيرٌ", "3-1 الإجمالُ في طلبِ الدُّنيا / حديثٌ شريفٌ", "4-1 المعطي المانعُ / عقيدةٌ", "5-1 صلحُ الحُدَيْبِيَةِ / سيرةٌ", "6-1 الأمنُ النفسيُّ / قيمٌ وأخلاقٌ", "1-2 التِقاءُ السَّاكِنَيْنِ (١) / تجويدٌ", "2-2 سورةُ الإسراءِ (١٠٥-١١١) / تفسيرٌ", "3-2 شُعَبُ الإيمانِ / حديثٌ شريفٌ", "4-2 دعوةُ نوحٍ عليه السلام / عقيدةٌ", "5-2 مِنْ مَصادِرِ التَّشريعِ الإسلاميِّ (١) / فِقْهٌ", "6-2 سَمْتُ أهلِ عُمانَ / قيمٌ وأخلاقٌ", "1-3 التِقاءُ السَّاكِنَيْنِ (٢) / تجويدٌ", "2-3 سورةُ الحِجْرِ (٨٧-٩٩) / تفسيرٌ", "3-3 أكبرُ الكبائرِ / حديثٌ شريفٌ", "4-3 مِنْ مَصادِرِ التَّشريعِ الإسلاميِّ (٢) / فِقْهٌ", "5-3 المجلس النبويُّ / سيرةٌ", "6-3 سماحةُ المؤمنِ / قيمٌ وأخلاقٌ", "1-4 سورةُ يوسفَ (٩٤-١٠١) / تفسيرٌ", "2-4 المُسْتَظِلُّونَ بِظِلِّ اللهِ / حديثٌ شريفٌ", "3-4 دعوةُ إبراهيمَ عليه السلام / عقيدةٌ", "4-4 الأيمانُ / فِقْهٌ", "5-4 القَعْقاعُ بنُ عَمْروٍ رضي الله عنه / سيرةٌ", "6-4 النَّزاهَةُ / قيمٌ وأخلاقٌ"],
  "اللغة العربية": ["1-1 القراءة: البلاغة عند العرب", "1-2 الأنشطة النحوية والصرفية: تطبيقات على ما سبقت دراسته", "1-3 الأنشطة الإملائية: تطبيقات على ما سبقت دراسته", "1-4 التعبير: كتابة فقرة", "1-5 في المعجم: المعجم المختص", "1-6 النص الأدبي: يا سماء", "2-1 القراءة: الأدب في عصر اليعاربة", "2-2 الأنشطة النحوية والصرفية: جملة كاد وأخواتها", "2-3 الأنشطة الإملائية: الهمزة المتطرفة", "2-4 التعبير: تصميم الموضوع", "2-5 الاستماع: عمان جوهرة جزيرة العرب", "2-6 اقرأ واستمتع: من نصيحة الشيخ الخراسيني لأحد أئمة اليعاربة", "3-1 القراءة: المتنبي", "3-2 الأنشطة النحوية والصرفية: الأفعال المتعدية إلى مفعولين أصلهما المبتدأ والخبر", "3-3 الأنشطة الإملائية: تنوين الهمزة المتطرفة", "3-4 التعبير: تصميم موضوع وكتابته", "3-5 النص الأدبي: لوحة الزمن", "4-1 القراءة: قرآن الفجر", "4-2 الأنشطة النحوية والصرفية: الأفعال المتعدية إلى مفعولين ليس أصلهما المبتدأ والخبر", "4-3 الأنشطة الإملائية: رسم الألف في أواخر الأسماء", "4-4 التعبير: التلخيص", "4-5 الاستماع: مريم الصناع", "4-6 اقرأ واستمتع: في العلم", "5-1 القراءة: القصة في القرآن الكريم", "5-2 الأنشطة النحوية والصرفية: المفعول لأجله", "5-3 الأنشطة الإملائية: تطبيقات على رسم الهمزة المتطرفة وكتابة الألف في أواخر الأسماء", "5-4 التعبير: تلخيص موضوع", "5-5 النص الأدبي: يا كوكبا ما كان أقصر عمره", "6-1 القراءة: سيرة بقلم صاحبها", "6-2 الأنشطة النحوية والصرفية: المفعول المطلق", "6-3 الأنشطة الإملائية: رسم الألف في أواخر الأفعال", "6-4 التعبير: ترجمة علم", "6-5 الاستماع: علم الآثار في عصر الفضاء", "6-6 اقرأ واستمتع: ألم تغمض عيناك", "7-1 القراءة: كتاب تحفة الأعيان بسيرة أهل عمان", "7-2 الأنشطة النحوية والصرفية: المفعول فيه", "7-3 الأنشطة الإملائية: تطبيقات على رسم الألف في أواخر الأسماء والأفعال", "7-4 التعبير: كيفية عرض كتاب", "7-5 النص الأدبي: أبا تمام - أين تكون؟", "8-1 القراءة: من الخيال العلمي", "8-2 الأنشطة النحوية والصرفية: مراجعة لما سبقت دراسته", "8-3 الأنشطة الإملائية: تدريبات على علامات الترقيم", "8-4 التعبير: حكاية قصة", "8-5 الاستماع: الرازي", "8-6 النص الأدبي: حسن المجالسة وسوؤها", "8-7 اقرأ واستمتع: حذق طبيب"],
  "اللغة الإنجليزية": ["Unit 1: Teen Time", "Unit 2: Writers and Writing", "Unit 3: Money", "Unit 4: Space", "Club Corner"],
  "الرياضيات": ["1-1 الأنواع المختلفة من الأعداد", "2-1 الأعداد الأولية", "3-1 القوى والجذور", "4-1 الأعداد الموجهة", "5-1 ترتيب العمليات الحسابية", "1-2 الكسور المتكافئة", "2-2 العمليات على الكسور", "3-2 النسب المئوية", "4-2 الصيغة العلمية", "5-2 الآلة الحاسبة والصيغة العلمية", "6-2 الأعداد النسبية والأعداد غير النسبية", "1-3 استخدام الحروف (المتغيرات) لتمثيل القيم المجهولة", "2-3 التعويض", "3-3 تبسيط العبارات الجبرية", "4-3 التعامل مع الأقواس", "5-3 الأسس", "1-4 الدائرة", "2-4 الزوايا", "3-4 الإنشاءات الهندسية", "4-4 المثلثات", "5-4 الأشكال الرباعية", "6-4 مضلعات أخرى", "1-5 تقريب الأعداد", "2-5 التقدير", "3-5 الحدود العليا والحدود الدنيا", "1-6 فك الأقواس", "2-6 تحليل العبارات الجبرية إلى عوامل", "3-6 استخدام الصيغ وإعادة تنظيمها", "4-6 حل المعادلات", "5-6 المعادلات الخطية الآنية", "6-6 كتابة المعادلات لحل المسائل", "7-6 المتباينات الخطية", "1-7 رسم المستقيمات", "2-7 القطعة المستقيمة", "1-8 التماثل في الأشكال ثنائية الأبعاد", "2-8 التماثل في الأشكال ثلاثية الأبعاد", "3-8 التحويلات الهندسية", "4-8 تركيب التحويلات الهندسية", "1-9 المتتاليات", "2-9 المجموعات"],
@@ -556,6 +778,14 @@ const subjectOrder = {
 };
 
 function $(id){ return document.getElementById(id); }
+
+/* 🌟 التحكم بالنافذة المنبثقة (Modal) */
+function openInstructionsModal() {
+  $('instructionsModal').classList.add('active');
+}
+function closeInstructionsModal() {
+  $('instructionsModal').classList.remove('active');
+}
 
 function switchTab(tabName) {
   if(window.innerWidth > 1024) return;
@@ -628,7 +858,6 @@ function loadSubjects(){
   loadLessons();
 }
 
-// 🌟 تحميل كروت الدروس بتحديد ذكي
 function loadLessons(){
   const grade = $('gradeSelect').value;
   const subject = $('subjectSelect').value;
@@ -650,19 +879,56 @@ function loadLessons(){
     </div>`).join('');
 }
 
-// 🌟 تفعيل التأثير البصري المماثل للون الشعار للكارت عند اختياره
 function toggleCardSelection(index) {
   const chk = document.getElementById(`chk_${index}`);
   const card = document.getElementById(`card_${index}`);
-  if (chk.checked) {
-    card.classList.add('selected');
-  } else {
-    card.classList.remove('selected');
+  if (chk && card) {
+    if (chk.checked) card.classList.add('selected');
+    else card.classList.remove('selected');
   }
 }
 
 let selectedLessonsList = [];
 let breaksList = [];
+
+/* 💾 حفظ البيانات تلقائياً في ذاكرة المتصفح (LocalStorage) */
+function saveDraftToStorage() {
+  localStorage.setItem('thaber_selectedLessons', JSON.stringify(selectedLessonsList));
+  localStorage.setItem('thaber_breaksList', JSON.stringify(breaksList));
+  localStorage.setItem('thaber_studentName', $('studentName').value);
+  localStorage.setItem('thaber_grade', $('gradeSelect').value);
+}
+
+/* 🔄 استرجاع البيانات عند الفتح */
+function loadDraftFromStorage() {
+  const savedLessons = localStorage.getItem('thaber_selectedLessons');
+  const savedBreaks = localStorage.getItem('thaber_breaksList');
+  const savedName = localStorage.getItem('thaber_studentName');
+  const savedGrade = localStorage.getItem('thaber_grade');
+
+  if (savedName) $('studentName').value = savedName;
+  if (savedGrade) {
+    $('gradeSelect').value = savedGrade;
+    loadSubjects();
+  }
+  if (savedLessons) {
+    selectedLessonsList = JSON.parse(savedLessons);
+    renderSelectedList();
+  }
+  if (savedBreaks) {
+    breaksList = JSON.parse(savedBreaks);
+    renderBreaksList();
+  }
+}
+
+/* 🗑️ تفريغ كافة الدروس من المسودة */
+function clearDraft() {
+  if (confirm('هل أنت تأكد من تفريغ كافة الدروس من المسودة؟')) {
+    selectedLessonsList = [];
+    renderSelectedList();
+    saveDraftToStorage();
+  }
+}
 
 function addLesson(){
   const grade = $('gradeSelect').value;
@@ -670,20 +936,38 @@ function addLesson(){
   const checkboxes = document.querySelectorAll('#lessonSelect input[type="checkbox"]:checked');
   if(!grade || !subject || checkboxes.length === 0){ alert('حدد درسًا واحدًا على الأقل.'); return; }
   
+  let duplicateCount = 0;
+
   checkboxes.forEach(cb => {
     const idx = cb.value;
+    const lessonName = lessonData[grade][subject][idx];
     const actSelect = document.getElementById(`act_${idx}`);
-    selectedLessonsList.push({ 
-      subject: subject, 
-      lesson: lessonData[grade][subject][idx], 
-      activity: actSelect ? actSelect.value : 'فهم وشرح',
-      pdfUrl: '#',
-      interactiveUrl: '#'
-    });
+    const activityVal = actSelect ? actSelect.value : 'فهم وشرح';
+
+    const isAlreadyAdded = selectedLessonsList.some(item => item.subject === subject && item.lesson === lessonName);
+
+    if (isAlreadyAdded) {
+      duplicateCount++;
+    } else {
+      selectedLessonsList.push({ 
+        subject: subject, 
+        lesson: lessonName, 
+        activity: activityVal,
+        pdfUrl: '#',
+        interactiveUrl: '#'
+      });
+    }
+
     cb.checked = false;
     toggleCardSelection(idx);
   });
+
+  if (duplicateCount > 0) {
+    alert(`⚠️ تم تجاهل (${duplicateCount}) درس/دروس لأنها مضافة بالفعل في المسودة.`);
+  }
+
   renderSelectedList();
+  saveDraftToStorage();
 }
 
 function renderSelectedList(){
@@ -692,15 +976,23 @@ function renderSelectedList(){
       <div><strong>${item.subject}</strong> - ${item.lesson} <span style="font-size:0.75rem; color:var(--text-secondary);">(${item.activity})</span></div>
       <span class="remove-btn" onclick="removeLesson(${i})">×</span>
     </div>`).join('');
+  
   $('lessonsCount').textContent = selectedLessonsList.length;
   $('subjectsCount').textContent = new Set(selectedLessonsList.map(x=>x.subject)).size;
+  
+  // إظهار أو إخفاء زر التفريغ
+  $('clearDraftContainer').style.display = selectedLessonsList.length > 0 ? 'block' : 'none';
 }
 
-function removeLesson(index){ selectedLessonsList.splice(index, 1); renderSelectedList(); }
+function removeLesson(index){ 
+  selectedLessonsList.splice(index, 1); 
+  renderSelectedList(); 
+  saveDraftToStorage();
+}
 
 function addBreak(){
   const label = $('breakLabel').value.trim() || 'استراحة / صلاة';
-  const startMins = timeToMinutes($('breakStartTime').value);
+  const startMins = timeToMinutes($breakStartTime.value);
   const duration = parseInt($('breakDuration').value, 10);
   
   if (breaksList.some(b => startMins < (b.startMins + b.duration) && (startMins + duration) > b.startMins)) {
@@ -710,6 +1002,7 @@ function addBreak(){
   breaksList.sort((a, b) => a.startMins - b.startMins);
   $('breakLabel').value = '';
   renderBreaksList();
+  saveDraftToStorage();
 }
 
 function renderBreaksList(){
@@ -721,18 +1014,17 @@ function renderBreaksList(){
   $('breaksCount').textContent = breaksList.length;
 }
 
-function removeBreak(index){ breaksList.splice(index, 1); renderBreaksList(); }
+function removeBreak(index){ 
+  breaksList.splice(index, 1); 
+  renderBreaksList(); 
+  saveDraftToStorage();
+}
 
 function getLessonDuration(activity) {
-  if (activity === 'تحضير الدرس') {
-    return 15;
-  } else if (activity === 'مراجعة سريعة') {
-    return 25;
-  } else if (activity === 'تلخيص وحفظ') {
-    return 35;
-  } else if (activity === 'فهم وشرح' || activity === 'حل أسئلة') {
-    return 45;
-  }
+  if (activity === 'تحضير الدرس') return 15;
+  if (activity === 'مراجعة سريعة') return 25;
+  if (activity === 'تلخيص وحفظ') return 35;
+  if (activity === 'فهم وشرح' || activity === 'حل أسئلة') return 45;
   return 30;
 }
 
@@ -808,7 +1100,6 @@ function generateSchedule(){
   switchTab('workspace');
 }
 
-// 📄 دالة تصدير PDF
 function exportPDF() {
   const scheduleArea = $('scheduleArea');
   const timelineBody = $('timelineBody');
@@ -860,6 +1151,13 @@ window.addEventListener('DOMContentLoaded', () => {
   $('generateBtn').addEventListener('click', generateSchedule);
   $('printBtn').addEventListener('click', () => window.print());
   $('pdfBtn').addEventListener('click', exportPDF);
+
+  $('instructionsModal').addEventListener('click', (e) => {
+    if (e.target === $('instructionsModal')) closeInstructionsModal();
+  });
+
+  // استرجاع المسودة المحفوظة
+  loadDraftFromStorage();
 });
 </script>
 </body>
