@@ -4,7 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-<!-- 🌟 عنوان ووسوم المعاينة الاحترافية للواتساب وتطبيقات التواصل (Open Graph) -->
+<!-- 🌟 مكتبات جوجل ودمج العلامة المائية للـ PDF -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+
+<!-- 🌟 عنوان ووسوم المعاينة -->
 <title>مخطط ثابر الذكي | منصة ثابر التعليمية</title>
 <meta name="description" content="نظّم وقتك، ضاعف تركيزك، واصنع جدول مذاكرتك الشخصي في ثوانٍ مع منصة ثابر التعليمية." />
 <meta property="og:title" content="مخطط ثابر الذكي | منصة ثابر التعليمية" />
@@ -17,7 +21,6 @@
 
 <style>
 :root {
-  /* 🌟 درجات لون أزرق شعار "ثابر" الرسمي */
   --brand-primary: #2253a3;
   --brand-dark: #194082;
   --brand-gradient: linear-gradient(135deg, #2253a3 0%, #366bc5 100%);
@@ -46,7 +49,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* 🌟 الشريط العلوي والشعار المطور */
 .app-header {
   background: var(--panel-bg);
   border-bottom: 1px solid var(--border-color);
@@ -58,96 +60,45 @@ body {
   max-width: 1300px; margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between;
 }
-.brand-logo { 
-  display: flex; 
-  align-items: center; 
-  gap: 12px; 
-}
-.brand-logo-img {
-  height: 48px;
-  width: auto;
-  object-fit: contain;
-}
-.brand-title h1 { 
-  font-size: 1.25rem; 
-  font-weight: 900; 
-  color: var(--brand-primary); 
-  line-height: 1.2; 
-}
-.brand-title p { 
-  font-size: 0.8rem; 
-  color: var(--text-secondary); 
-  font-weight: 700; 
-  margin-top: -2px;
-}
+.brand-logo { display: flex; align-items: center; gap: 12px; }
+.brand-logo-img { height: 48px; width: auto; object-fit: contain; }
+.brand-title h1 { font-size: 1.25rem; font-weight: 900; color: var(--brand-primary); line-height: 1.2; }
+.brand-title p { font-size: 0.8rem; color: var(--text-secondary); font-weight: 700; margin-top: -2px; }
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* 💡 زر النافذة المنبثقة للتعليمات */
+.header-actions { display: flex; align-items: center; gap: 10px; }
 .btn-instructions {
-  background: var(--brand-light);
-  color: var(--brand-primary);
-  border: 1.5px solid #c1d6f3;
-  font-family: inherit;
-  font-size: 0.85rem;
-  font-weight: 800;
-  padding: 8px 14px;
-  border-radius: 999px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: 0.2s ease;
+  background: var(--brand-light); color: var(--brand-primary);
+  border: 1.5px solid #c1d6f3; font-family: inherit; font-size: 0.85rem; font-weight: 800;
+  padding: 8px 14px; border-radius: 999px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s ease;
 }
-.btn-instructions:hover {
-  background: var(--brand-primary);
-  color: #ffffff;
-}
+.btn-instructions:hover { background: var(--brand-primary); color: #ffffff; }
 
-/* 💬 شارة الواتساب التفاعلية */
 .badge-contact {
   background: #25d366; color: #ffffff; font-size: 0.85rem;
   font-weight: 800; padding: 8px 16px; border-radius: 999px;
   text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
   box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3); transition: 0.2s ease;
 }
-.badge-contact:hover {
-  transform: scale(1.03); background: #1ebd56;
-}
+.badge-contact:hover { transform: scale(1.03); background: #1ebd56; }
 
-/* 📱 شريط التبويبات للموبايل */
 .mobile-tabs {
-  display: none;
-  background: var(--panel-bg);
-  border-bottom: 1px solid var(--border-color);
-  padding: 10px 20px 0;
-  position: sticky; top: 69px; z-index: 999;
+  display: none; background: var(--panel-bg); border-bottom: 1px solid var(--border-color);
+  padding: 10px 20px 0; position: sticky; top: 69px; z-index: 999;
 }
-.mobile-tabs-inner {
-  display: flex; gap: 10px; max-width: 500px; margin: 0 auto;
-}
+.mobile-tabs-inner { display: flex; gap: 10px; max-width: 500px; margin: 0 auto; }
 .tab-btn {
   flex: 1; padding: 12px 10px; font-family: inherit; font-weight: 800; font-size: 0.95rem;
   background: none; border: none; border-bottom: 3px solid transparent;
   color: var(--text-secondary); cursor: pointer; transition: 0.3s;
 }
-.tab-btn.active {
-  color: var(--brand-primary); border-bottom-color: var(--brand-primary);
-}
+.tab-btn.active { color: var(--brand-primary); border-bottom-color: var(--brand-primary); }
 
-/* 📐 التنسيق الرئيسي */
 .app-layout {
   max-width: 1300px; margin: 20px auto; padding: 0 20px;
   display: flex; gap: 24px; align-items: flex-start;
 }
 
-.control-panel, .workspace {
-  display: flex; flex-direction: column; gap: 16px;
-}
+.control-panel, .workspace { display: flex; flex-direction: column; gap: 16px; }
 .control-panel { flex: 0 0 400px; }
 .workspace { flex: 1; min-width: 0; }
 
@@ -174,7 +125,7 @@ body {
 
 .field-group { margin-bottom: 14px; }
 label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px; }
-input[type="text"], input[type="date"], select {
+input[type="text"], input[type="email"], input[type="date"], select {
   width: 100%; padding: 12px 14px; border: 1.5px solid var(--border-color);
   border-radius: var(--radius-md); font-family: inherit; font-size: 0.9rem; font-weight: 600;
   background: var(--bg-main); color: var(--text-primary); outline: none; transition: 0.2s;
@@ -196,147 +147,39 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
 
 .lessons-picker { max-height: 340px; overflow-y: auto; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); padding: 10px; background: var(--bg-main); }
 
-/* 🌟 تصميم بطاقة الدرس */
 .lesson-card-item {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 14px;
-  border-radius: var(--radius-md);
-  background: #ffffff;
-  margin-bottom: 10px;
-  border: 1.5px solid var(--border-color);
-  transition: all 0.25s ease;
+  display: flex; flex-direction: column; gap: 10px; padding: 14px;
+  border-radius: var(--radius-md); background: #ffffff; margin-bottom: 10px;
+  border: 1.5px solid var(--border-color); transition: all 0.25s ease;
 }
-.lesson-card-item:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-}
-.lesson-card-item.selected {
-  background: var(--brand-light);
-  border-color: var(--brand-primary);
-  box-shadow: 0 4px 12px rgba(34, 83, 163, 0.12);
-}
-.lesson-info-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  cursor: pointer;
-  font-size: 0.92rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  line-height: 1.45;
-}
-.lesson-info-row input[type="checkbox"] {
-  accent-color: var(--brand-primary);
-  width: 20px;
-  height: 20px;
-  margin-top: 2px;
-  flex-shrink: 0;
-  cursor: pointer;
-}
-.lesson-activity-select {
-  width: 100% !important;
-  padding: 9px 12px !important;
-  font-size: 0.85rem !important;
-  font-weight: 800 !important;
-  border-radius: 10px !important;
-  border: 2px solid var(--brand-primary) !important;
-  background-color: #ffffff !important;
-  color: var(--brand-primary) !important;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
+.lesson-card-item:hover { border-color: #cbd5e1; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+.lesson-card-item.selected { background: var(--brand-light); border-color: var(--brand-primary); }
+.lesson-info-row { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 0.92rem; font-weight: 800; color: var(--text-primary); line-height: 1.45; }
+.lesson-info-row input[type="checkbox"] { accent-color: var(--brand-primary); width: 20px; height: 20px; margin-top: 2px; flex-shrink: 0; cursor: pointer; }
+.lesson-activity-select { width: 100% !important; padding: 9px 12px !important; font-size: 0.85rem !important; font-weight: 800 !important; border-radius: 10px !important; border: 2px solid var(--brand-primary) !important; background-color: #ffffff !important; color: var(--brand-primary) !important; outline: none; cursor: pointer; }
 
 .selected-tags { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
 .tag-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); border-right: 4px solid var(--brand-primary); padding: 10px 12px; border-radius: var(--radius-sm); font-size: 0.82rem; }
 .tag-item .remove-btn { color: #ef4444; font-size: 1.2rem; cursor: pointer; font-weight: bold; }
 
-/* 🗑️ زر مسح المسودة */
-.clear-draft-btn {
-  background: #fef2f2;
-  color: #ef4444;
-  border: 1px dashed #fca5a5;
-  padding: 8px;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 800;
-  cursor: pointer;
-  margin-top: 6px;
-  text-align: center;
-  transition: 0.2s;
-  width: 100%;
-}
-.clear-draft-btn:hover {
-  background: #fee2e2;
-}
+.clear-draft-btn { background: #fef2f2; color: #ef4444; border: 1px dashed #fca5a5; padding: 8px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; cursor: pointer; margin-top: 6px; text-align: center; transition: 0.2s; width: 100%; }
+.clear-draft-btn:hover { background: #fee2e2; }
 
-/* 📊 الإحصائيات */
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .stat-box { background: var(--panel-bg); border-radius: var(--radius-lg); padding: 16px; border: 1px solid var(--border-color); text-align: center; }
 .stat-number { font-size: 1.5rem; font-weight: 900; color: var(--brand-primary); display: block; }
 .stat-label { font-size: 0.75rem; font-weight: 700; color: var(--text-secondary); }
 
-/* 🗓️ المخطط الزمني والهوية الرسمية */
 .timeline-card { background: var(--panel-bg); border-radius: var(--radius-lg); border: 1px solid var(--border-color); overflow: hidden; position: relative; }
+.schedule-watermark { position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%) rotate(-25deg); opacity: 0.05; pointer-events: none; z-index: 1; width: 65%; max-width: 450px; text-align: center; }
+.schedule-watermark img { width: 100%; height: auto; }
 
-/* 🌊 العلامة المائية الشفافة منصة ثابر */
-.schedule-watermark {
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-25deg);
-  opacity: 0.05;
-  pointer-events: none;
-  z-index: 1;
-  width: 65%;
-  max-width: 450px;
-  text-align: center;
-}
-.schedule-watermark img {
-  width: 100%;
-  height: auto;
-}
-
-/* 🌟 جدول الطباعة المحسن لضمان تكرار الهيدر في كل صفحة */
-.print-layout-table {
-  width: 100%;
-  border-collapse: collapse;
-  position: relative;
-  z-index: 2;
-}
-.print-layout-table td {
-  padding: 0;
-}
-
-.thaber-brand-stamp {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 20px;
-  background: var(--brand-light);
-  border-bottom: 2px solid var(--brand-primary);
-  width: 100%;
-}
-.stamp-logo-img {
-  height: 48px;
-  width: auto;
-  object-fit: contain;
-}
-.stamp-info {
-  text-align: left;
-}
-.stamp-info h4 {
-  font-size: 0.95rem;
-  font-weight: 900;
-  color: var(--brand-primary);
-}
-.stamp-info p {
-  font-size: 0.8rem;
-  font-weight: 800;
-  color: #1ebd56;
-}
+.print-layout-table { width: 100%; border-collapse: collapse; position: relative; z-index: 2; }
+.print-layout-table td { padding: 0; }
+.thaber-brand-stamp { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: var(--brand-light); border-bottom: 2px solid var(--brand-primary); width: 100%; }
+.stamp-logo-img { height: 48px; width: auto; object-fit: contain; }
+.stamp-info h4 { font-size: 0.95rem; font-weight: 900; color: var(--brand-primary); }
+.stamp-info p { font-size: 0.8rem; font-weight: 800; color: #1ebd56; }
 
 .timeline-header { background: var(--brand-gradient); color: #fff; padding: 22px 24px; }
 .timeline-header h2 { font-size: 1.25rem; font-weight: 900; display: flex; align-items: center; gap: 8px; }
@@ -359,101 +202,30 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
 .lesson-details strong { font-size: 0.95rem; color: var(--text-primary); display: block; }
 .lesson-details p { font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; }
 
-/* 🔗 أزرار الروابط التفاعلية */
 .resource-bar { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-.res-link { display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; font-weight: 800; padding: 5px 12px; border-radius: 8px; text-decoration: none; transition: 0.2s; }
+.res-link { display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; font-weight: 800; padding: 5px 12px; border-radius: 8px; text-decoration: none; transition: 0.2s; cursor: pointer;}
 .res-link:hover { transform: translateY(-1px); filter: brightness(0.95); }
 .res-video { background: #fef2f2; color: #dc2626; border: 1px solid #fca5a5; }
 .res-pdf { background: #fdf2f8; color: #db2777; border: 1px solid #fbcfe8; }
 .res-interactive { background: var(--brand-light); color: var(--brand-primary); border: 1px solid #c1d6f3; }
 .res-exam { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+.res-locked { background: #f1f5f9; color: #64748b; border: 1px dashed #cbd5e1; }
 
 .timeline-actions { background: var(--panel-bg); padding: 16px 24px; display: flex; gap: 10px; justify-content: flex-end; border: 1px solid var(--border-color); border-radius: var(--radius-lg); margin-top: 16px; flex-wrap: wrap; }
 
-/* 🪟 تنسيقات النافذة المنبثقة (Modal) */
-.modal-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  padding: 20px;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-}
-.modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-.modal-card {
-  background: #ffffff;
-  border-radius: var(--radius-lg);
-  max-width: 580px;
-  width: 100%;
-  max-height: 85vh;
-  overflow-y: auto;
-  padding: 28px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
-  transform: translateY(20px);
-  transition: transform 0.3s ease;
-  position: relative;
-}
-.modal-overlay.active .modal-card {
-  transform: translateY(0);
-}
-.modal-header-title {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding-bottom: 14px;
-  border-bottom: 2px solid var(--brand-light);
-  margin-bottom: 18px;
-}
-.modal-header-title h3 {
-  font-size: 1.2rem;
-  font-weight: 900;
+.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 20px; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+.modal-overlay.active { opacity: 1; visibility: visible; }
+.modal-card { background: #ffffff; border-radius: var(--radius-lg); max-width: 580px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 28px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2); transform: translateY(20px); transition: transform 0.3s ease; position: relative; }
+.modal-overlay.active .modal-card { transform: translateY(0); }
+
+.sync-loader {
+  display: inline-block;
+  font-size: 0.75rem;
   color: var(--brand-primary);
-}
-.instructions-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.instruction-step {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  background: var(--bg-main);
-  padding: 12px 16px;
-  border-radius: var(--radius-md);
-  border-right: 4px solid var(--brand-primary);
-}
-.instruction-num {
-  background: var(--brand-primary);
-  color: #fff;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  font-weight: 900;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.instruction-text {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.5;
+  font-weight: 800;
+  margin-right: 8px;
 }
 
-/* 📱 استجابة الشاشات */
 @media (max-width: 1024px) {
   .mobile-tabs { display: block; }
   .app-layout { display: block; padding: 15px; }
@@ -463,49 +235,17 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
   body.view-workspace .workspace { display: flex !important; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .timeline-content { flex-direction: column; align-items: flex-start; }
-  .time-pill { margin-top: 10px; align-self: flex-end; }
-  .day-title { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .timeline-actions button { width: 100% !important; }
 }
 
-/* 🖨️ التنسيقات الدقيقة للطباعة والتصدير لـ PDF (إظهار الأزرار والروابط) */
 @media print {
-  @page {
-    size: A4 portrait;
-    margin: 8mm;
-  }
+  @page { size: A4 portrait; margin: 8mm; }
   body { background: #fff !important; padding: 0 !important; }
-  .app-header, .mobile-tabs, .control-panel, .stats-grid, .timeline-actions, .modal-overlay {
-    display: none !important;
-  }
+  .app-header, .mobile-tabs, .control-panel, .stats-grid, .timeline-actions, .modal-overlay { display: none !important; }
   .app-layout { display: block !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
   .workspace { display: block !important; width: 100% !important; }
-  .timeline-card { border: none !important; box-shadow: none !important; }
-  
-  thead.print-header-group {
-    display: table-header-group !important;
-  }
-  .thaber-brand-stamp { 
-    display: flex !important; 
-    border-bottom: 2px solid var(--brand-primary) !important;
-    background: #f5f8ff !important;
-    margin-bottom: 10px;
-  }
-  .schedule-watermark {
-    opacity: 0.08 !important;
-  }
-  
-  /* 🌟 إظهار أزرار الروابط وتلوينها بوضوح في الـ PDF المطبوع */
+  thead.print-header-group { display: table-header-group !important; }
   .resource-bar { display: flex !important; gap: 6px !important; margin-top: 6px !important; }
-  .res-link {
-    display: inline-flex !important;
-    padding: 3px 8px !important;
-    font-size: 0.7rem !important;
-    border-radius: 4px !important;
-    text-decoration: none !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
+  .res-link { display: inline-flex !important; padding: 3px 8px !important; font-size: 0.7rem !important; border-radius: 4px !important; text-decoration: none !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 }
 </style>
 </head>
@@ -513,26 +253,17 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
 
 <header class="app-header">
   <div class="header-inner">
-    
-    <!-- 🌟 الشعار والعنوان -->
     <div class="brand-logo">
       <img src="https://i.imgur.com/pZ9hazV.png" crossorigin="anonymous" alt="شعار ثابر" class="brand-logo-img">
       <div class="brand-title">
         <h1>مخطط ثابر الذكي</h1>
-        <p>منصة ثابر التعليمية</p>
+        <p>النسخة المحمية الموثقة</p>
       </div>
     </div>
 
     <div class="header-actions">
-      <!-- 📖 زر فتح النافذة المنبثقة للتعليمات -->
-      <button type="button" class="btn-instructions" onclick="openInstructionsModal()">
-        📖 طريقة الاستخدام
-      </button>
-
-      <!-- 💬 زر تواصل عبر الواتساب -->
-      <a href="https://wa.me/96871444589" target="_blank" class="badge-contact">
-        💬 71444589
-      </a>
+      <button type="button" class="btn-instructions" onclick="openInstructionsModal()">📖 طريقة الاستخدام</button>
+      <a href="https://wa.me/96871444589" target="_blank" class="badge-contact">💬 71444589</a>
     </div>
   </div>
 </header>
@@ -564,6 +295,31 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
       <div class="field-group">
         <label>اسم الطالب (اختياري)</label>
         <input type="text" id="studentName" placeholder="مثال: أحمد">
+      </div>
+
+      <!-- 🔐 زر ودبوس تسجيل الدخول الموثق بحساب Google -->
+      <div class="field-group">
+        <label>التحقق من الاشتراك (تسجيل الدخول موثق)</label>
+        <div id="googleAuthSection">
+          <div id="g_id_onload"
+               data-client_id="850336296571-jt6e5fvnp08btkl1vgaeesph8vlqt9nj.apps.googleusercontent.com"
+               data-callback="handleCredentialResponse"
+               data-auto_prompt="false">
+          </div>
+          <div class="g_id_signin" 
+               data-type="standard" 
+               data-size="large" 
+               data-theme="outline" 
+               data-text="sign_in_with" 
+               data-shape="rectangular" 
+               data-logo_alignment="left">
+          </div>
+
+          <div id="userProfileBadge" style="display:none; background: var(--brand-light); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid #c1d6f3; align-items: center; justify-content: space-between; margin-top: 8px;">
+            <span id="userEmailDisplay" style="font-weight: 800; font-size: 0.85rem; color: var(--brand-primary);"></span>
+            <button type="button" onclick="googleSignOut()" style="background: #ef4444; color: #fff; border: none; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 800; cursor: pointer;">خروج 🚪</button>
+          </div>
+        </div>
       </div>
 
       <div class="field-group">
@@ -614,7 +370,7 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
     <div class="panel-card">
       <div class="card-header">
         <span class="step-badge">3</span>
-        <h2>الصف الدراسي</h2>
+        <h2>الصف الدراسي <span id="syncLoader" class="sync-loader"></span></h2>
       </div>
       <div class="field-group">
         <select id="gradeSelect">
@@ -657,33 +413,17 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
 
   <main class="workspace" id="workspaceArea">
     <div class="stats-grid">
-      <div class="stat-box">
-        <span class="stat-number" id="lessonsCount">0</span>
-        <span class="stat-label">الدروس</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-number" id="subjectsCount">0</span>
-        <span class="stat-label">المواد</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-number" id="studyTimeCount">0</span>
-        <span class="stat-label">دقيقة مذاكرة</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-number" id="breaksCount">0</span>
-        <span class="stat-label">فواصل</span>
-      </div>
+      <div class="stat-box"><span class="stat-number" id="lessonsCount">0</span><span class="stat-label">الدروس</span></div>
+      <div class="stat-box"><span class="stat-number" id="subjectsCount">0</span><span class="stat-label">المواد</span></div>
+      <div class="stat-box"><span class="stat-number" id="studyTimeCount">0</span><span class="stat-label">دقيقة مذاكرة</span></div>
+      <div class="stat-box"><span class="stat-number" id="breaksCount">0</span><span class="stat-label">فواصل</span></div>
     </div>
 
-    <!-- 🗓️ منطقة الجدول مع العلامة المائية والترويسة المطبوعة المكررة -->
     <div class="timeline-card" id="scheduleArea">
-      
-      <!-- 🌊 العلامة المائية الشفافة -->
       <div class="schedule-watermark">
         <img src="https://i.imgur.com/pZ9hazV.png" crossorigin="anonymous" alt="علامة مائية منصة ثابر">
       </div>
 
-      <!-- 🌟 الجدول المتكامل لضمان تكرار الترويسة في كل صفحة عند الطباعة/PDF -->
       <table class="print-layout-table">
         <thead class="print-header-group">
           <tr>
@@ -719,7 +459,6 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
       </table>
     </div>
 
-    <!-- 🖨️ أزرار الإجراءات الرئيسية -->
     <div class="timeline-actions">
       <button type="button" class="btn btn-whatsapp" id="shareWaBtn" style="width:auto;">📲 إرسال الجدول عبر الواتساب</button>
       <button type="button" class="btn btn-outline" id="calendarBtn" style="width:auto;">📅 إضافة للتقويم الشخصي</button>
@@ -728,114 +467,146 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
   </main>
 </div>
 
-<!-- 🪟 النافذة المنبثقة (Modal) للتعليمات -->
 <div class="modal-overlay" id="instructionsModal">
   <div class="modal-card">
     <div class="modal-header-title">
       <span style="font-size: 1.5rem;">📖</span>
       <h3>دليل استخدام مخطط ثابر الذكي</h3>
     </div>
-    
     <div class="instructions-list">
-      <div class="instruction-step">
-        <span class="instruction-num">1</span>
-        <div class="instruction-text">
-          <strong>تحديد الروتين والوقت:</strong> اختر نوع الخطة (يومية أو أسبوعية)، أدخل اسمك وتاريخ بداية المذاكرة، ثم حدد وقت بداية ونهاية جلسة المذاكرة اليومية.
-        </div>
-      </div>
-
-      <div class="instruction-step">
-        <span class="instruction-num">2</span>
-        <div class="instruction-text">
-          <strong>إضافة أوقات الصلاة والاستراحة:</strong> أدخل اسم الاستراحة (مثلاً: صلاة المغرب) ووقتها ومدتها ليتم حجزها تلقائياً داخل جدولك وعدم التعارض مع المذاكرة.
-        </div>
-      </div>
-
-      <div class="instruction-step">
-        <span class="instruction-num">3</span>
-        <div class="instruction-text">
-          <strong>اختيار الدروس ونوع المذاكرة:</strong> حدد صفك الدراسي والمادة، اختر الدروس وحدد نوع المذاكرة المناسب لكل درس (تحضير، مراجعة سريعة، فهم وشرح، إلخ).
-        </div>
-      </div>
-
-      <div class="instruction-step">
-        <span class="instruction-num">4</span>
-        <div class="instruction-text">
-          <strong>الجمع من مواد مختلفة:</strong> اضغط على زر <code>إضافة للمسودة +</code>. يمكنك تغيير المادة واختيار دروس أخرى لجمع عدة مواد في نفس المسودة السفلية!
-        </div>
-      </div>
-
-      <div class="instruction-step">
-        <span class="instruction-num">5</span>
-        <div class="instruction-text">
-          <strong>توليد وحفظ المخطط:</strong> اضغط على <code>✨ إنشاء المخطط الزمني</code> ليقوم النظام بتوزيع دروسك بدقة، ثم يمكنك طباعته أو مزامنه مع تقويمك أو إرساله للواتساب.
-        </div>
-      </div>
+      <div class="instruction-step"><span class="instruction-num">1</span><div class="instruction-text"><strong>تحديد الروتين والوقت:</strong> قم بتسجيل الدخول بحسابك الموثق لتفعيل دروسك.</div></div>
+      <div class="instruction-step"><span class="instruction-num">2</span><div class="instruction-text"><strong>إضافة أوقات الصلاة والاستراحة:</strong> أدخل اسم وقت الاستراحة لعدم التعارض مع المذاكرة.</div></div>
+      <div class="instruction-step"><span class="instruction-num">3</span><div class="instruction-text"><strong>اختيار الدروس:</strong> يتم جلب الدروس والمواد ديناميكياً وأمان من جوجل شيت.</div></div>
     </div>
-
-    <!-- 👈 زر الرجوع للمخطط -->
-    <button type="button" class="btn btn-brand" onclick="closeInstructionsModal()" style="margin-top: 24px; width: 100%;">
-      👈 رجوع للمخطط
-    </button>
+    <button type="button" class="btn btn-brand" onclick="closeInstructionsModal()" style="margin-top: 24px; width: 100%;">👈 رجوع للمخطط</button>
   </div>
 </div>
 
 <script>
 'use strict';
 
-// 🔗 رابط Google Apps Script الخاص بك المباشر
-const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzHe97UL3ydMUKcesP_dxBda4qyYQ6fJNsl-ZDSqd2G3tJy_8TYa6Qc64cyPHwZzMiGAg/exec";
+const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbx4T3dMdY7m3ZXtx6EiAEzqIxqy6QORPiZ4Im-POAtgzAjP823j4wVOH66tPUE5GnUu3Q/exec";
 
-// 🔧 دالة ذكية لمعالجة الروابط وضمان إضافة https:// وتجنب خطأ 404
+// 🔑 تفكيك توكن Google
+function parseJwt (token) {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+      return '%' + ('0' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+  return JSON.parse(jsonPayload);
+}
+
+// 🛡️ استلام نتيجة تسجيل الدخول من Google
+function handleCredentialResponse(response) {
+  const responsePayload = parseJwt(response.credential);
+  const verifiedEmail = responsePayload.email.toLowerCase();
+  
+  localStorage.setItem('thaber_verified_email', verifiedEmail);
+  updateUserGoogleUI(verifiedEmail);
+  fetchDataFromSheet();
+}
+
+function googleSignOut() {
+  localStorage.removeItem('thaber_verified_email');
+  location.reload();
+}
+
+function updateUserGoogleUI(email) {
+  const btn = document.querySelector('.g_id_signin');
+  if (btn) btn.style.display = 'none';
+  if ($('userProfileBadge')) $('userProfileBadge').style.display = 'flex';
+  if ($('userEmailDisplay')) $('userEmailDisplay').textContent = '✅ ' + email;
+}
+
 function formatUrl(url) {
   if (!url || typeof url !== 'string') return '';
   let trimmed = url.trim();
-  if (trimmed === '' || trimmed === '#') return '';
+  if (!trimmed || trimmed === '#' || trimmed.toLowerCase() === 'null' || trimmed.toLowerCase() === 'undefined') return '';
   if (!/^https?:\/\//i.test(trimmed)) {
-    return 'https://' + trimmed;
+    trimmed = 'https://' + trimmed;
   }
   return trimmed;
 }
 
-// 📚 قاعدة بيانات محلية شاملة (تضمن الفتح الفوري بدون انتظار)
-const defaultLessonData = {
- "5": {
-    "التربية الإسلامية": ["القرآن الكريم", "العقيدة", "الحديث الشريف", "الفقه", "السيرة"],
-    "اللغة العربية": ["القراءة", "النصوص الأدبية", "القواعد", "الإملاء", "التعبير"],
-    "اللغة الإنجليزية": ["Reading", "Grammar", "Writing", "Vocabulary", "Listening"],
-    "الرياضيات": ["الأعداد والعمليات", "الكسور", "القياس", "الهندسة", "البيانات"],
-    "العلوم": ["الكائنات الحية", "المادة", "القوى والطاقة", "الأرض والفضاء"]
- },
- "12": {
-    "التربية الإسلامية": ["1-1 أخطاء عند تطبيق أحكام الميم والنون الساكنتين والتنوين", "1-2 أخطاء في تطبيق المدود", "1-3 أخطاء عند تطبيق صفات الحروف", "2-1 قيم الحضارة الإسلامية"],
-    "اللغة العربية": ["المؤنس 1-1 ما ينبغي جل أن يسمى: أبو الطيب", "المؤنس 1-2 من خصائص شعر المتنبي", "المفيد 1-1 أسلوب التعجب"],
-    "الفيزياء": ["1-1 تمثيل مجال الجاذبية", "2-1 شدة مجال الجاذبية", "3-1 الطاقة وجهد الجاذبية"],
-    "الكيمياء": ["1-1 الأحماض والقواعد", "2-1 الأحماض والقواعد القوية والضعيفة", "3-1 ثابت تأين الماء Kw"],
-    "الأحياء": ["1-1 تركيب DNA و RNA", "2-1 تضاعف DNA", "3-1 الشفرة الجينية"]
- }
-};
+// 🛡️ تحويل رابط جوجل درايف للتحميل المباشر لتسهيل دمج العلامة المائية
+function getDriveDirectUrl(url) {
+  const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if (match && match[1]) {
+    return `https://drive.google.com/uc?export=download&id=${match[1]}`;
+  }
+  return url;
+}
 
-let cached = localStorage.getItem('thaber_lesson_data_cached');
-let lessonData = cached ? JSON.parse(cached) : defaultLessonData;
-
-// 🌟 جلب التحديثات في الخلفية بدون حجب أو تعطيل واجهة المستخدم (Background Sync)
-async function syncLessonsFromSheetInBackground() {
+// 🖨️ دالة فتح ملف الـ PDF وطباعة العلامة المائية عليه برمجياً
+async function openWatermarkedPDF(originalUrl) {
+  const userEmail = localStorage.getItem('thaber_verified_email') || 'غير موثق (النسخة المجانية)';
+  const directUrl = getDriveDirectUrl(originalUrl);
+  
   try {
-    if (GOOGLE_SHEET_URL) {
-      const response = await fetch(GOOGLE_SHEET_URL);
-      const data = await response.json();
-      if (data && Object.keys(data).length > 0) {
-        lessonData = data;
-        localStorage.setItem('thaber_lesson_data_cached', JSON.stringify(data));
-        console.log("⚡ تم التحديث السريع والامتزاج مع Google Sheets");
-        
-        if ($('gradeSelect').value) {
-          loadSubjects();
-        }
+    // محاولة جلب الملف (قد يتم حظره من قبل جوجل درايف بسبب الـ CORS)
+    const existingPdfBytes = await fetch(directUrl).then(res => res.arrayBuffer());
+    const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
+    const pages = pdfDoc.getPages();
+    
+    pages.forEach(page => {
+      const { width, height } = page.getSize();
+      page.drawText(`مخصص للطالب: ${userEmail}`, {
+        x: width / 6,
+        y: height / 2,
+        size: 20,
+        opacity: 0.25,
+        rotate: PDFLib.degrees(35),
+      });
+    });
+
+    const pdfBytes = await pdfDoc.save();
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const blobUrl = URL.createObjectURL(blob);
+    window.open(blobUrl, '_blank');
+  } catch (err) {
+    // في حال حظر الجلب بسبب سياسات جوجل، يتم فتح الملف الأصلي بشكل طبيعي
+    console.warn("تم فتح الملف الأصلي نظراً لقيود سياسة الحماية (CORS).");
+    window.open(originalUrl, '_blank');
+  }
+}
+
+function promptSubscription(lessonName, grade) {
+  if(confirm(`🔒 هذا المحتوى مخصص لطلاب (الصف ${grade}) المشتركين.\n\nهل ترغب بالانتقال لصفحة الاشتراك وتفعيل حسابك الآن؟`)) {
+    // الرابط الجديد لصفحة الاشتراك
+    window.location.href = "https://thaber-academy.github.io/sched-sub/"; 
+  }
+}
+
+let fullData = { lessons: {} };
+
+async function fetchDataFromSheet() {
+  const loader = $('syncLoader');
+  const userEmail = localStorage.getItem('thaber_verified_email') || '';
+  
+  if (userEmail) {
+    updateUserGoogleUI(userEmail);
+  }
+
+  try {
+    if (loader) loader.textContent = "⏳ جلب الدروس...";
+    
+    const requestUrl = GOOGLE_SHEET_URL + "?email=" + encodeURIComponent(userEmail);
+    const response = await fetch(requestUrl);
+    const data = await response.json();
+    
+    if (data && data.lessons) {
+      fullData = data;
+      if (loader) loader.textContent = "✅ تم التحميل";
+      setTimeout(() => { if(loader) loader.textContent = ""; }, 2000);
+      
+      if ($('gradeSelect').value) {
+        loadSubjects();
       }
     }
   } catch (error) {
-    console.warn("⚡ يعمل بالنظام المحلي الفائق السرعة.", error);
+    console.warn("⚡ تعذر جلب البيانات من شيت جوجل.", error);
+    if (loader) loader.textContent = "⚠️ خطأ في الاتصال";
   }
 }
 
@@ -845,7 +616,6 @@ const subjectOrder = {
 };
 
 function $(id){ return document.getElementById(id); }
-
 function openInstructionsModal() { $('instructionsModal').classList.add('active'); }
 function closeInstructionsModal() { $('instructionsModal').classList.remove('active'); }
 
@@ -879,39 +649,54 @@ function minutesToTimeStr(mins) {
 }
 
 function populateTimeControls(){
-  document.querySelectorAll('select.time-12').forEach(select => {
-    const defaultVal = select.dataset.defaultTime || '00:00';
-    select.innerHTML = '';
-    for(let m = 0; m < 1440; m += 15){
-      const hh = Math.floor(m / 60);
-      const mm = String(m % 60).padStart(2, '0');
-      const timeVal = `${String(hh).padStart(2,'0')}:${mm}`;
-      const period = hh < 12 ? 'صباحًا' : 'مساءً';
-      const displayHour = (hh % 12) === 0 ? 12 : (hh % 12);
-      const option = document.createElement('option');
-      option.value = timeVal;
-      option.textContent = `${String(displayHour).padStart(2,'0')}:${mm} ${period}`;
-      select.appendChild(option);
-    }
-    select.value = defaultVal;
-  });
+  try {
+    document.querySelectorAll('select.time-12').forEach(select => {
+      const defaultVal = select.dataset.defaultTime || '00:00';
+      select.innerHTML = '';
+      for(let m = 0; m < 1440; m += 15){
+        const hh = Math.floor(m / 60);
+        const mm = String(m % 60).padStart(2, '0');
+        const timeVal = `${String(hh).padStart(2,'0')}:${mm}`;
+        const period = hh < 12 ? 'صباحًا' : 'مساءً';
+        const displayHour = (hh % 12) === 0 ? 12 : (hh % 12);
+        const displayHStr = String(displayHour).padStart(2, '0');
+        const option = document.createElement('option');
+        option.value = timeVal;
+        option.textContent = `${displayHStr}:${mm} ${period}`;
+        select.appendChild(option);
+      }
+      select.value = defaultVal;
+    });
 
-  if(!$('studyDate').value) $('studyDate').valueAsDate = new Date();
+    const dateInput = $('studyDate');
+    if(dateInput && !dateInput.value) {
+      const now = new Date();
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth() + 1).padStart(2, '0');
+      const dd = String(now.getDate()).padStart(2, '0');
+      dateInput.value = `${yyyy}-${mm}-${dd}`;
+    }
+  } catch (err) {
+    console.error("خطأ في جلب التواقيت:", err);
+  }
 }
 
 function loadSubjects(){
   const grade = $('gradeSelect').value;
   const lessonCard = $('lessonCard');
-  if(!grade || !lessonData[grade]){ lessonCard.style.display = 'none'; return; }
+  const lessonsObj = fullData.lessons || {};
 
-  let subjects = Object.keys(lessonData[grade] || {});
+  if(!grade || !lessonsObj[grade]){ 
+    lessonCard.style.display = 'none'; 
+    return; 
+  }
+
+  let subjects = Object.keys(lessonsObj[grade] || {});
   if(subjectOrder[grade]) {
     subjects.sort((a, b) => {
       let idxA = subjectOrder[grade].indexOf(a);
       let idxB = subjectOrder[grade].indexOf(b);
-      if(idxA === -1) idxA = 999;
-      if(idxB === -1) idxB = 999;
-      return idxA - idxB;
+      return (idxA === -1 ? 999 : idxA) - (idxB === -1 ? 999 : idxB);
     });
   }
 
@@ -923,7 +708,8 @@ function loadSubjects(){
 function loadLessons(){
   const grade = $('gradeSelect').value;
   const subject = $('subjectSelect').value;
-  const lessons = (lessonData[grade] && lessonData[grade][subject]) || [];
+  const lessonsObj = fullData.lessons || {};
+  const lessons = (lessonsObj[grade] && lessonsObj[grade][subject]) || [];
   
   $('lessonSelect').innerHTML = lessons.map((l, i) => {
     const lessonName = typeof l === 'object' ? l.name : l;
@@ -973,16 +759,19 @@ function addLesson(isAuto = false){
   }
   
   let duplicateCount = 0;
+  const lessonsObj = fullData.lessons || {};
 
   checkboxes.forEach(cb => {
     const idx = cb.value;
-    const lessonObj = lessonData[grade][subject][idx];
+    const lessonObj = lessonsObj[grade][subject][idx];
     
     const lessonName = typeof lessonObj === 'object' ? lessonObj.name : lessonObj;
+    
     const videoUrl = formatUrl(typeof lessonObj === 'object' ? (lessonObj.video || '') : '');
     const activityUrl = formatUrl(typeof lessonObj === 'object' ? (lessonObj.activity || '') : '');
     const examUrl = formatUrl(typeof lessonObj === 'object' ? (lessonObj.exam || '') : '');
     const pdfUrl = formatUrl(typeof lessonObj === 'object' ? (lessonObj.pdf || '') : '');
+    const accessType = typeof lessonObj === 'object' ? (lessonObj.access || 'مجاني') : 'مجاني';
 
     const actSelect = document.getElementById(`act_${idx}`);
     const activityVal = actSelect ? actSelect.value : 'فهم وشرح';
@@ -999,7 +788,9 @@ function addLesson(isAuto = false){
         videoUrl: videoUrl,
         activityUrl: activityUrl,
         examUrl: examUrl,
-        pdfUrl: pdfUrl
+        pdfUrl: pdfUrl,
+        access: accessType,
+        grade: grade
       });
     }
 
@@ -1090,7 +881,9 @@ function generateSchedule(){
   let lessonsQueue = [...selectedLessonsList];
   let dayOffset = 0, totalStudyMins = 0;
   let maxDays = planType === 'daily' ? 1 : 7;
-  const baseDate = new Date(baseDateVal);
+  
+  const [yyyy, mm, dd] = baseDateVal.split('-').map(Number);
+  const baseDate = new Date(yyyy, mm - 1, dd);
 
   while (lessonsQueue.length > 0 && dayOffset < maxDays) {
     let currentDate = new Date(baseDate);
@@ -1123,17 +916,35 @@ function generateSchedule(){
       if (actualDuration > 0) {
         totalStudyMins += actualDuration;
         
+        const isLocked = (item.access === 'مشتركين' && !item.videoUrl && !item.pdfUrl && !item.activityUrl && !item.examUrl);
+
         let resHtml = '';
-        if(item.videoUrl) resHtml += `<a href="${item.videoUrl}" target="_blank" class="res-link res-video">🎥 فيديو الشرح</a>`;
-        if(item.pdfUrl) resHtml += `<a href="${item.pdfUrl}" target="_blank" class="res-link res-pdf">📄 ملخص PDF</a>`;
-        if(item.activityUrl) resHtml += `<a href="${item.activityUrl}" target="_blank" class="res-link res-interactive">🌐 نشاط تفاعلي</a>`;
-        if(item.examUrl) resHtml += `<a href="${item.examUrl}" target="_blank" class="res-link res-exam">📝 اختبار إلكتروني</a>`;
+        
+        const makeBtn = (url, label, btnClass, icon) => {
+          const formatted = formatUrl(url);
+          if (!formatted) return '';
+          return `<a href="${formatted}" target="_blank" rel="noopener noreferrer" class="res-link ${btnClass}">${icon} ${label}</a>`;
+        };
+
+        if (isLocked) {
+          resHtml += `<a onclick="promptSubscription('${item.lesson}', '${item.grade}')" class="res-link res-locked">🔒 محتوى مخصص للمشتركين (اضغط للتسجيل)</a>`;
+        } else {
+          // دمج الأزرار العادية وزر الـ PDF المائي
+          resHtml += makeBtn(item.videoUrl, 'فيديو الشرح', 'res-video', '🎥');
+          
+          if (item.pdfUrl) {
+            resHtml += `<a onclick="openWatermarkedPDF('${item.pdfUrl}')" class="res-link res-pdf">📄 ملخص PDF</a>`;
+          }
+          
+          resHtml += makeBtn(item.activityUrl, 'نشاط تفاعلي', 'res-interactive', '🌐');
+          resHtml += makeBtn(item.examUrl, 'اختبار إلكتروني', 'res-exam', '📝');
+        }
 
         container.innerHTML += `
           <div class="timeline-item">
             <div class="timeline-content">
               <div class="lesson-details">
-                <strong>${item.subject} - ${item.lesson}</strong>
+                <strong>${item.subject} - ${item.lesson} ${isLocked ? '<span style="color:#ef4444; font-size:0.75rem;">(🔒 مشتركين)</span>' : ''}</strong>
                 <p>نوع النشاط: ${item.activity} (${actualDuration} دقيقة)</p>
                 <div class="resource-bar">${resHtml}</div>
               </div>
@@ -1145,10 +956,6 @@ function generateSchedule(){
     }
     timelineBody.appendChild(daySection);
     dayOffset++;
-  }
-
-  if (lessonsQueue.length > 0 && planType === 'daily') {
-    timelineBody.innerHTML += `<div style="background:#fef2f2; color:#991b1b; padding:15px; border-radius:10px; font-weight:bold; text-align:center;">⚠️ امتلأ وقت اليوم المتاح! متبقي لديك (${lessonsQueue.length}) دروس. اختر (أسبوعي) لترحيلها للغد أوتوماتيكياً.</div>`;
   }
 
   $('studyTimeCount').textContent = totalStudyMins;
@@ -1194,7 +1001,9 @@ function exportToICS() {
   const studyStartMins = timeToMinutes($('startTime').value);
   const studyEndMins = timeToMinutes($('endTime').value);
   const planType = document.querySelector('input[name="planType"]:checked').value;
-  const baseDate = new Date(baseDateVal);
+  
+  const [yyyy, mm, dd] = baseDateVal.split('-').map(Number);
+  const baseDate = new Date(yyyy, mm - 1, dd);
   
   let icsLines = [
     'BEGIN:VCALENDAR',
@@ -1274,6 +1083,8 @@ function formatICSDate(dateObj, mins) {
   return `${year}${month}${day}T${hours}${minutes}00`;
 }
 
+populateTimeControls();
+
 window.addEventListener('DOMContentLoaded', () => {
   populateTimeControls();
   
@@ -1290,8 +1101,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (e.target === $('instructionsModal')) closeInstructionsModal();
   });
 
-  // مزامنة التحديثات صامتاً في الخلفية بدون حجب الواجهة
-  syncLessonsFromSheetInBackground();
+  fetchDataFromSheet();
 });
 </script>
 </body>
