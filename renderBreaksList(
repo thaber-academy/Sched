@@ -996,44 +996,6 @@ function toggleCardSelection(index) {
 let selectedLessonsList = [];
 let breaksList = [];
 
-/* 💾 حفظ البيانات تلقائياً في ذاكرة المتصفح (LocalStorage) */
-function saveDraftToStorage() {
-  localStorage.setItem('thaber_selectedLessons', JSON.stringify(selectedLessonsList));
-  localStorage.setItem('thaber_breaksList', JSON.stringify(breaksList));
-  localStorage.setItem('thaber_studentName', $('studentName').value);
-  localStorage.setItem('thaber_grade', $('gradeSelect').value);
-}
-
-/* 🔄 استرجاع البيانات عند الفتح */
-function loadDraftFromStorage() {
-  const savedLessons = localStorage.getItem('thaber_selectedLessons');
-  const savedBreaks = localStorage.getItem('thaber_breaksList');
-  const savedName = localStorage.getItem('thaber_studentName');
-  const savedGrade = localStorage.getItem('thaber_grade');
-
-  if (savedName) $('studentName').value = savedName;
-  if (savedGrade) {
-    $('gradeSelect').value = savedGrade;
-    loadSubjects();
-  }
-  if (savedLessons) {
-    selectedLessonsList = JSON.parse(savedLessons);
-    renderSelectedList();
-  }
-  if (savedBreaks) {
-    breaksList = JSON.parse(savedBreaks);
-    renderBreaksList();
-  }
-}
-
-/* 🗑️ تفريغ كافة الدروس من المسودة */
-function clearDraft() {
-  if (confirm('هل أنت تأكد من تفريغ كافة الدروس من المسودة؟')) {
-    selectedLessonsList = [];
-    renderSelectedList();
-    saveDraftToStorage();
-  }
-}
 
 // 🌟 إضافة الدروس للمسودة مع فحص منع التكرار
 function addLesson(isAuto = false){
@@ -1252,8 +1214,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (e.target === $('instructionsModal')) closeInstructionsModal();
   });
 
-  // استرجاع المسودة المحفوظة
-  loadDraftFromStorage();
+
 });
 </script>
 </body>
