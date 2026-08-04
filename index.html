@@ -363,7 +363,7 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
 .res-pdf { background: #fee2e2; color: #dc2626; }
 .res-interactive { background: var(--brand-light); color: var(--brand-primary); }
 
-.timeline-actions { background: var(--panel-bg); padding: 16px 24px; display: flex; gap: 10px; justify-content: flex-end; border: 1px solid var(--border-color); border-radius: var(--radius-lg); margin-top: 16px; }
+.timeline-actions { background: var(--panel-bg); padding: 16px 24px; display: flex; gap: 10px; justify-content: flex-end; border: 1px solid var(--border-color); border-radius: var(--radius-lg); margin-top: 16px; flex-wrap: wrap; }
 
 #loadingStatus { background: #e0f2fe; color: #0369a1; padding: 12px; border-radius: var(--radius-md); font-weight: 800; text-align: center; font-size: 0.85rem; margin-bottom: 15px; display: none; }
 
@@ -462,6 +462,7 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
   .timeline-content { flex-direction: column; align-items: flex-start; }
   .time-pill { margin-top: 10px; align-self: flex-end; }
   .day-title { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .timeline-actions button { width: 100% !important; }
 }
 
 /* 🖨️ التنسيقات الدقيقة والمثالية للطباعة وحفظ PDF وتكرار الترويسة في كل صفحة */
@@ -708,6 +709,7 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
     <!-- 🖨️ أزرار الإجراءات الرئيسية -->
     <div class="timeline-actions">
       <button type="button" class="btn btn-whatsapp" id="shareWaBtn" style="width:auto;">📲 إرسال الجدول عبر الواتساب</button>
+      <button type="button" class="btn btn-outline" id="calendarBtn" style="width:auto;">📅 إضافة للتقويم الشخصي</button>
       <button type="button" class="btn btn-brand" id="printBtn" style="width:auto;">🖨️ طباعة الجدول / حفظ كـ PDF</button>
     </div>
   </main>
@@ -753,7 +755,7 @@ input:focus, select:focus { background: #fff; border-color: var(--brand-primary)
       <div class="instruction-step">
         <span class="instruction-num">5</span>
         <div class="instruction-text">
-          <strong>توليد وحفظ المخطط:</strong> اضغط على <code>✨ إنشاء المخطط الزمني</code> ليقوم النظام بتوزيع دروسك بدقة، ثم يمكنك طباعته أو حفظه كـ PDF موثق بشعار ثابر.
+          <strong>توليد وحفظ المخطط:</strong> اضغط على <code>✨ إنشاء المخطط الزمني</code> ليقوم النظام بتوزيع دروسك بدقة، ثم يمكنك طباعته أو مزامنه مع تقويمك أو إرساله للواتساب.
         </div>
       </div>
     </div>
@@ -1185,6 +1187,105 @@ function shareViaWhatsApp() {
   window.open(`https://api.whatsapp.com/send?text=${encodedMsg}`, '_blank');
 }
 
+/* 📅 دالة تصدير الجدول كملف تقويم (.ics) */
+function exportToICS() {
+  if (!selectedLessonsList.length) {
+    alert('⚠️ يرجى إنشاء المخطط الزمني أولاً قبل التصدير للتقويم.');
+    return;
+  }
+
+  const baseDateVal = $('studyDate').value;
+  if (!baseDateVal) {
+    alert('اختر تاريخ بداية الجدول أولاً.');
+    return;
+  }
+
+  const studyStartMins = timeToMinutes($('startTime').value);
+  const studyEndMins = timeToMinutes($('endTime').value);
+  const planType = document.querySelector('input[name="planType"]:checked').value;
+  const baseDate = new Date(baseDateVal);
+  
+  let icsLines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Thaber Platform//Study Planner//AR',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH'
+  ];
+
+  let lessonsQueue = [...selectedLessonsList];
+  let dayOffset = 0;
+  let maxDays = planType === 'daily' ? 1 : 7;
+
+  while (lessonsQueue.length > 0 && dayOffset < maxDays) {
+    let currentDate = new Date(baseDate);
+    currentDate.setDate(baseDate.getDate() + dayOffset);
+
+    let currentTime = studyStartMins;
+
+    while (currentTime < studyEndMins && lessonsQueue.length > 0) {
+      // فحص الاستراحات
+      const activeBreak = breaksList.find(b => currentTime >= b.startMins && currentTime < (b.startMins + b.duration));
+      if (activeBreak) {
+        const breakEndMins = Math.min(activeBreak.startMins + activeBreak.duration, studyEndMins);
+        icsLines.push(...createICSEvent(currentDate, currentTime, breakEndMins, `☕ ${activeBreak.label}`, 'استراحة مخصصة في جدول ثابر'));
+        currentTime = breakEndMins;
+        continue;
+      }
+
+      const item = lessonsQueue.shift();
+      let duration = getLessonDuration(item.activity);
+      let nextBreak = breaksList.find(b => b.startMins > currentTime && b.startMins < (currentTime + duration));
+      let sessionEndMins = Math.min(nextBreak ? nextBreak.startMins : currentTime + duration, studyEndMins);
+
+      let actualDuration = sessionEndMins - currentTime;
+      if (actualDuration > 0) {
+        let title = `📚 ${item.subject}: ${item.lesson}`;
+        let description = `نوع النشاط: ${item.activity} - منصة ثابر التعليمية`;
+        icsLines.push(...createICSEvent(currentDate, currentTime, sessionEndMins, title, description));
+        currentTime = sessionEndMins;
+      }
+    }
+    dayOffset++;
+  }
+
+  icsLines.push('END:VCALENDAR');
+
+  // تحميل الملف للمستخدم
+  const blob = new Blob([icsLines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+  const link = document.createElement('a');
+  link.href = window.URL.createObjectURL(blob);
+  link.setAttribute('download', `جدول_ثابر_${baseDateVal}.ics`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+/* دالة مساعدة لتنسيق تواريخ ووقت التقويم القياسي */
+function createICSEvent(dateObj, startMins, endMins, summary, description) {
+  const startDT = formatICSDate(dateObj, startMins);
+  const endDT = formatICSDate(dateObj, endMins);
+  
+  return [
+    'BEGIN:VEVENT',
+    `SUMMARY:${summary}`,
+    `DESCRIPTION:${description}`,
+    `DTSTART:${startDT}`,
+    `DTEND:${endDT}`,
+    'STATUS:CONFIRMED',
+    'END:VEVENT'
+  ];
+}
+
+function formatICSDate(dateObj, mins) {
+  const year = dateObj.getFullYear();
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  const hours = String(Math.floor(mins / 60)).padStart(2, '0');
+  const minutes = String(mins % 60).padStart(2, '0');
+  return `${year}${month}${day}T${hours}${minutes}00`;
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   populateTimeControls();
   $('gradeSelect').addEventListener('change', loadSubjects);
@@ -1194,6 +1295,7 @@ window.addEventListener('DOMContentLoaded', () => {
   $('generateBtn').addEventListener('click', generateSchedule);
   $('printBtn').addEventListener('click', () => window.print());
   $('shareWaBtn').addEventListener('click', shareViaWhatsApp);
+  $('calendarBtn').addEventListener('click', exportToICS);
 
   $('instructionsModal').addEventListener('click', (e) => {
     if (e.target === $('instructionsModal')) closeInstructionsModal();
